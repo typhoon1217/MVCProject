@@ -1,47 +1,70 @@
 package controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import view.EmpVo;
+import model.EmpVo;
+import view.MenuChoice;
 
 public class SLoginDAO {
-	
-	private static void loginValidation(String id, String pw) {
-		String sql = "SELECT EMP_DEPARTMENT FROM Employee WHERE EMP_ID = ? AND EMP_PASSWORD = ? ";
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, empVo.getEMP_ID());
-			pstmt.setString(2, empVo.getEMP_PASSWORD());
-			int i = pstmt.executeUpdate();
-			if (i == 1) {
-				System.out.println(EmpVo.getS_name() + " 학과 수정 완료.");
-				System.out.println("학과 수정 성공!!!");
-			} else {
-				System.out.println("로그인 실패!!!");
-			}
-		} catch (SQLException e) {
-			System.out.println("e=[" + e + "]");
-		} catch (Exception e) {
-			System.out.println("e=[" + e + "]");
-		} finally {
-			try {
-				// 데이터베이스와의 연결에 사용되었던 오브젝트를 해제
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-			}
-		}
+    
+    public static String loginAndGetDepartment(String id, String password) {
+        String department = MenuChoice.FAIL;
+        
+        String sql = "SELECT EMP_DEPARTMENT FROM Employee WHERE EMP_ID = ? AND EMP_PASSWORD = ?";
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        EmpVo evo = null;
+        
+        try {
+            con = DBUtil.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.setString(2, password);
+            
+            rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                System.out.print("Passed as: ");
+                // 부서명을 가져오기
+                department = rs.getString("EMP_DEPARTMENT");
+                System.out.println(department);
+            } else {
+                //직원 없음 fail 유지
+                System.out.println("Invalid credentials. Please try again.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // 예외 처리
+        } finally {
+            // 리소스 해제 --메모리 누수 방지를 위해 별도로 닫아줌
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return department;
+    }
 
-	}
 }
+
+

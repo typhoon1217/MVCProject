@@ -1,9 +1,0 @@
-package main;
-
-public class SrestMain {
-	public static void main(String[] args) {
-		// 메뉴화면함수
-		//mainMenu();
-		System.out.println("The end");
-	}
-}

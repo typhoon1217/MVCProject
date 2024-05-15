@@ -1,3 +1,4 @@
+
 INSERT INTO Customers (customer_id, customer_name, customer_email, customer_phone_number, customer_address, customer_grade)
 VALUES ('john1234', 'John Doe', 'john31@example.com', '01010022999', '123 Main St', 'Sliver');
 
@@ -6,21 +7,21 @@ VALUES ('jane1234', 'Jane Smith', 'jane12@sample.com', '01020011020', '456 Elm S
 
 
 INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_contact, emp_salary)
-VALUES ('admin', 'admin', '신중우', NULL, 'admin', '01012341111', 70000);
+VALUES ('admin123', 'Qwer!234', '신중우', NULL, 'admin', '01012341111', 70000);
 
 INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_contact, emp_salary)
-VALUES ('server', 'server', '서중우', '신중우', 'sever', '01012321123', 10000);
+VALUES ('server123', 'Qwer!234', '서중우', '신중우', 'sever', '01012321123', 10000);
 
 INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_contact, emp_salary)
-VALUES ('server2', 'server', '서이우', '신중우', 'sever', '01012342222', 10000);
-
-
-INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_contact, emp_salary)
-VALUES ('chef', 'chef', '세중우', '신중우', 'chef', '01012323411', 10000);
+VALUES ('server321', 'Qwer!234', '서이우', '신중우', 'sever', '01012342222', 10000);
 
 
 INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_contact, emp_salary)
-VALUES ('account', 'account', '어중우', '신중우', 'account', '01012321241', 10000);
+VALUES ('chef123', 'Qwer!234', '세중우', '신중우', 'chef', '01012323411', 10000);
+
+
+INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_contact, emp_salary)
+VALUES ('acc123', 'Qwer!234', '어중우', '신중우', 'account', '01012321241', 10000);
 
 
 
