@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="GENERATE_TRANSACTION_ID" directorySegmentName="seg_0" id="5CE7D484-110B-4F98-A64A-77D37B424E3C">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>GENERATE_TRANSACTION_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<actions>INSERT</actions>
+<body><![CDATA[BEGIN
+    :NEW.transaction_id := DBMS_RANDOM.STRING('X', 10); -- 랜덤한 20자리 문자열 생성
+END;]]></body>
+<triggerTime>BEFORE</triggerTime>
+<owner>7BB54472-A5B2-D6C0-5294-B7A0AA8D59E4</owner>
+<table>9DEB5D17-9C9B-03ED-4A08-C7E66F34271F</table>
+</TriggerOraclev10g>

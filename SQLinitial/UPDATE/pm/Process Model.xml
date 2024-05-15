@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="B613E6DC-F78C-8FC5-AAE3-FB4E81612F90">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:17:21 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

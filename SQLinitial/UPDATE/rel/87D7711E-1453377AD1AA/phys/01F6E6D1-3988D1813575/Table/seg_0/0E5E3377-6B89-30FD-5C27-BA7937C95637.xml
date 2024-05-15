@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="INGREDIENT" directorySegmentName="seg_0" id="0E5E3377-6B89-30FD-5C27-BA7937C95637">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>96F7D783-185C-B155-AEB4-C8EA3E998B17</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="INGREDIENT_NAME" id="602FF4FE-B94A-26CD-CAE6-1E3FF1FBB038">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INGREDIENT_UNIT" id="A4BE6211-4BBD-299A-F007-710089E8D1E4">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="INGREDIENT_PK" id="A48A4873-F8CB-A0D6-552D-5B4650AAED1C">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="INGREDIENT_PK" id="B7766ECB-EBB7-A75B-9B41-643F6EC8591D">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<existingIndex>A48A4873-F8CB-A0D6-552D-5B4650AAED1C</existingIndex>
+<indexSegment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

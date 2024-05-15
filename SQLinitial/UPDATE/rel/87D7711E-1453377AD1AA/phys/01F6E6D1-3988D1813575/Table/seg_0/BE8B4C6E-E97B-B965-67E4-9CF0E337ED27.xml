@@ -1,0 +1,45 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="RTABLE" directorySegmentName="seg_0" id="BE8B4C6E-E97B-B965-67E4-9CF0E337ED27">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>96F7D783-185C-B155-AEB4-C8EA3E998B17</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="TABLE_NO" id="F5A682C5-1707-933D-8143-863291D02AC9">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="RTABLE_PK" id="9D6C1FEC-2833-3499-3FCE-6AE803E1ED02">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="RTABLE_PK" id="F6CE74ED-420D-4CA8-7A5A-BBD09EE4EEDC">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<existingIndex>9D6C1FEC-2833-3499-3FCE-6AE803E1ED02</existingIndex>
+<indexSegment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

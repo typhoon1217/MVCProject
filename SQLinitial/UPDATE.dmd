@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="UPDATE" id="1EBD80A5-218C-80CE-4E29-70C2DDC97F6D" version="3.5">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:17:21 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>1EBD80A5-218C-80CE-4E29-70C2DDC97F6D</designId>
+</OSDM_Design>

@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9DEB5D17-9C9B-03ED-4A08-C7E66F34271F" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="ACCOUNTING">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>ACCOUNTING</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="TRANSACTION_ID" id="932C4B99-4AD5-8F46-1E8B-3ED46755A38C">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>ACCOUNTING</sourceObjSchema>
+<sourceObjName>TRANSACTION_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TRANSACTION_AMOUNT" id="0275C077-8EC3-DE35-1A83-43A9EDC376DC">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>ACCOUNTING</sourceObjSchema>
+<sourceObjName>TRANSACTION_AMOUNT</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TRANSACTION_TIME" id="17BC7C65-EB60-F2DE-09E6-13EBC1DC89FC">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>ACCOUNTING</sourceObjSchema>
+<sourceObjName>TRANSACTION_TIME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TRANSACTION_DESCRIPTION" id="88246C18-2D77-779B-0233-7034197CF39F">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>ACCOUNTING</sourceObjSchema>
+<sourceObjName>TRANSACTION_DESCRIPTION</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>90 BYTE</dataTypeSize>
+<ownDataTypeParameters>90 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B45EF7E5-D507-6791-D8B5-B7827361EB05" name="ACCOUNTING_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>ACCOUNTING_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="932C4B99-4AD5-8F46-1E8B-3ED46755A38C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A9B8F0B2-32C4-F840-BDD6-5125661EA914" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="ACCOUNTING_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>ACCOUNTING_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="932C4B99-4AD5-8F46-1E8B-3ED46755A38C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

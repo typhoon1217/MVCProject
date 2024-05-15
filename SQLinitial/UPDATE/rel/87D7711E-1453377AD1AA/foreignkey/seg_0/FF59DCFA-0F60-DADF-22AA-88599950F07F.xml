@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="FF59DCFA-0F60-DADF-22AA-88599950F07F" containerWithKeyObject="584EDA5C-DE97-D09C-E205-3C8FC998A1D5" localFKIndex="81453E37-B303-33A9-67DC-8DCBE990F0F4" name="FK_AORDERS_TABLE_NO">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>FK_AORDERS_TABLE_NO</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<referredTableLongName>MVCREST.RTABLE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>BE8B4C6E-E97B-B965-67E4-9CF0E337ED27</referredTableID>
+<keyObject>F6CE74ED-420D-4CA8-7A5A-BBD09EE4EEDC</keyObject>
+<referredKeyID>F6CE74ED-420D-4CA8-7A5A-BBD09EE4EEDC</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>TABLE_NO</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

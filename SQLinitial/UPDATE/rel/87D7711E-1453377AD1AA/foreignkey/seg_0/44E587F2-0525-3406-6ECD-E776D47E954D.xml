@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="44E587F2-0525-3406-6ECD-E776D47E954D" containerWithKeyObject="DED450FA-78C3-EF5A-D660-AD3BC013906A" localFKIndex="77310A8F-489A-B0BC-E4E9-E6A4792236B5" name="FK_IRECIPE_R_INGREDIENT">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>FK_IRECIPE_R_INGREDIENT</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<referredTableLongName>MVCREST.INGREDIENT</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>0E5E3377-6B89-30FD-5C27-BA7937C95637</referredTableID>
+<keyObject>B7766ECB-EBB7-A75B-9B41-643F6EC8591D</keyObject>
+<referredKeyID>B7766ECB-EBB7-A75B-9B41-643F6EC8591D</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>INGREDIENT_NAME</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

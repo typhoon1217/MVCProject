@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="IRECIPE" directorySegmentName="seg_0" id="DED450FA-78C3-EF5A-D660-AD3BC013906A">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>96F7D783-185C-B155-AEB4-C8EA3E998B17</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="I_RECIPE_QUANTITY" id="1F0639AE-2A3F-4C97-57AE-D0AA384041D1">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="I_INGREDIENT_NAME" id="3B82323D-C095-8ABC-CCFD-4B55BEC20077">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="R_INGREDIENT_NAME" id="432B16B1-C35C-D3D7-6776-AD04C69BCDFC">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="R_RECIPE_QUANTITY" id="D1184641-F873-5553-ABF8-F095A96D52BB">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="I_RECIPE_CONTENT_ID" id="E03B308B-0AA8-446A-B4EB-A76CB8134B0B">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="IRECIPE_PK" id="1AEBBEAC-CF54-2E3D-7EB9-7087390692FE">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_IRECIPE_R_INGREDIENT" id="77310A8F-489A-B0BC-E4E9-E6A4792236B5">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_IRECIPE_I_INGREDIENT" id="80C6966F-F535-6C60-DB73-220BEEFE7EFC">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="IRECIPE_PK" id="EF63E39D-4BB3-4F51-ED85-2CB73C0D940C">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<existingIndex>1AEBBEAC-CF54-2E3D-7EB9-7087390692FE</existingIndex>
+<indexSegment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A6F3FCF9-7575-BCC2-DD73-3D228996032D" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="TOTALSALES">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>TOTALSALES</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="SALES_MONTH" id="1F8942A9-6B62-4108-4F1C-D5D0795B9210">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>TOTALSALES</sourceObjSchema>
+<sourceObjName>SALES_MONTH</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SALES_INCOME" id="A0B021D6-193E-EB91-5E27-6A67BED49C9A">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>TOTALSALES</sourceObjSchema>
+<sourceObjName>SALES_INCOME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SALES_EXPENSE" id="F2F75137-48FE-00BA-B0EC-324DB8348057">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>TOTALSALES</sourceObjSchema>
+<sourceObjName>SALES_EXPENSE</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SALES_NETPROFIT" id="8E54F453-B47E-D0C6-9753-C2F4FD269420">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>TOTALSALES</sourceObjSchema>
+<sourceObjName>SALES_NETPROFIT</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4E0A799E-55A9-6BDC-4F2D-ACC8554B8AD9" name="TOTALSALES_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>TOTALSALES_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1F8942A9-6B62-4108-4F1C-D5D0795B9210"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FFB94C65-4735-469F-135B-606EF98C3E7A" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="TOTALSALES_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>TOTALSALES_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1F8942A9-6B62-4108-4F1C-D5D0795B9210"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

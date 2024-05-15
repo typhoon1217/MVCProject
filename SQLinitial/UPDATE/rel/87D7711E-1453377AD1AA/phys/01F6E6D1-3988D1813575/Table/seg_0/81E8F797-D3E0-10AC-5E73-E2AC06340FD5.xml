@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev20c class="oracle.dbtools.crest.model.design.storage.oracle.v20c.TableProxyOraclev20c" name="RECIPE" directorySegmentName="seg_0" id="81E8F797-D3E0-10AC-5E73-E2AC06340FD5">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>96F7D783-185C-B155-AEB4-C8EA3E998B17</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="FOOD_NAME" id="021923AE-293F-E446-3686-FA47B1E38281">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="RECIPE_CONTENT_ID" id="B52003A6-36FA-3AB3-79C2-5AC1CF4367B8">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="INGREDIENT_NAME" id="FBB2B529-2B22-2E57-3773-7888820A7852">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="RECIPE_QUANTITY" id="FDE310DE-F77D-5119-4A77-9F66A55E9093">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="RECIPE_PK" id="6954222B-4D8C-A527-5ABE-189EC3B7C2E0">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<schemaObject>9CF195B5-6BD8-7182-CB98-28984237DD51</schemaObject>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_RECIPE_MENU" id="2D929795-DBE7-7CBD-7979-1FAAEECB9D5E">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="FK_RECIPE_INGREDIENT" id="3E26A1E3-7B87-5A25-86B4-B8C5D2D6D1D4">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="RECIPE_PK" id="AD7A1ABE-4F03-FA94-4C9A-F264D21D55B6">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<segment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</segment>
+<tableSpace>D77C1FC8-8036-F766-81E7-0B6A8F22307E</tableSpace>
+<existingIndex>6954222B-4D8C-A527-5ABE-189EC3B7C2E0</existingIndex>
+<indexSegment>1838BF49-A9F6-3F3C-05BE-E8C6D7BAA68F</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev20c>

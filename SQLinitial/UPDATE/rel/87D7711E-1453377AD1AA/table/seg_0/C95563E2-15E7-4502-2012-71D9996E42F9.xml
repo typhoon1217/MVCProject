@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C95563E2-15E7-4502-2012-71D9996E42F9" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="REQUESTORDER">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>REQUESTORDER</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="REQUEST_ID" id="86C0EFB2-665E-1BCD-0073-2B61D863EA43">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>REQUESTORDER</sourceObjSchema>
+<sourceObjName>REQUEST_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 BYTE</dataTypeSize>
+<ownDataTypeParameters>5 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INGREDIENT_NAME" id="07DA6CDF-47BF-7A9D-2234-7BA640796F50">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>REQUESTORDER</sourceObjSchema>
+<sourceObjName>INGREDIENT_NAME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9B650483-5835-625F-8348-4C237A5517E0" referredColumn="602FF4FE-B94A-26CD-CAE6-1E3FF1FBB038"/>
+</associations>
+</Column>
+<Column name="REQUEST_QUANTITY" id="00863DE3-E985-8997-2AB9-9BE53E8F99C4">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>REQUESTORDER</sourceObjSchema>
+<sourceObjName>REQUEST_QUANTITY</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CEECE0E5-3CE8-FF2C-A308-B00BDD6CA97C" name="REQUESTORDER_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>REQUESTORDER_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="86C0EFB2-665E-1BCD-0073-2B61D863EA43"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DEF61D9D-2CF0-B7E3-B3B3-594D18FA1E3F" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="REQUESTORDER_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>REQUESTORDER_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="86C0EFB2-665E-1BCD-0073-2B61D863EA43"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="487B2330-F2CA-0529-8EF0-2F87DBF4AAB5" name="FK_REQUESTORDER_INGREDIENT">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="07DA6CDF-47BF-7A9D-2234-7BA640796F50"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

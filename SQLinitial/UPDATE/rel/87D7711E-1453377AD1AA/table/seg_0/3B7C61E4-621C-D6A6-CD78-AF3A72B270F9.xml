@@ -1,0 +1,112 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="3B7C61E4-621C-D6A6-CD78-AF3A72B270F9" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="INVENTORY">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>INVENTORY</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="INVENTORY_ID" id="1E96072D-3AD1-20C9-E617-CF78D266D815">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>INVENTORY</sourceObjSchema>
+<sourceObjName>INVENTORY_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="INGREDIENT_NAME" id="4BAE8A1F-65BA-6E10-2F52-3AA51E034C59">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>INVENTORY</sourceObjSchema>
+<sourceObjName>INGREDIENT_NAME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7571C87A-A99A-42FC-2D23-69A157F3C0ED" referredColumn="602FF4FE-B94A-26CD-CAE6-1E3FF1FBB038"/>
+</associations>
+</Column>
+<Column name="INVENTORY_QUANTITY" id="C3411D5D-C969-0124-7170-20321E2CA698">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>INVENTORY</sourceObjSchema>
+<sourceObjName>INVENTORY_QUANTITY</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EXPIRY_DATE" id="129E052E-C8B4-BA67-EBE1-483A17A3A6CB">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>INVENTORY</sourceObjSchema>
+<sourceObjName>EXPIRY_DATE</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="31284331-75D3-5510-2DB3-AE151288F779" name="INVENTORY_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>INVENTORY_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1E96072D-3AD1-20C9-E617-CF78D266D815"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FBAB02EB-B693-E7DA-D84C-050062172D45" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="INVENTORY_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>INVENTORY_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1E96072D-3AD1-20C9-E617-CF78D266D815"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4928F9EA-B71B-658C-4923-E0EAE25033F7" name="FK_INVENTORY_INGREDIENT">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BAE8A1F-65BA-6E10-2F52-3AA51E034C59"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

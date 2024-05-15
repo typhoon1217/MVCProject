@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="444D5ACB-8129-7E10-6E05-EE787611BCC2" containerWithKeyObject="611ED80F-DED5-D17E-2AC9-65B878789CA5" localFKIndex="2DE157D6-3864-13D1-914B-6501A961E513" name="FK_ORDER_DETAILS_FOOD_NAME">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>FK_ORDER_DETAILS_FOOD_NAME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<referredTableLongName>MVCREST.MENU</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>C3344B54-188E-5065-A705-75592CFA3AE9</referredTableID>
+<keyObject>32328A8D-D558-23F0-7AE9-779CB05E0D8F</keyObject>
+<referredKeyID>32328A8D-D558-23F0-7AE9-779CB05E0D8F</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>FOOD_NAME</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,137 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DED450FA-78C3-EF5A-D660-AD3BC013906A" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="IRECIPE">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>IRECIPE</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="I_RECIPE_CONTENT_ID" id="E03B308B-0AA8-446A-B4EB-A76CB8134B0B">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>IRECIPE</sourceObjSchema>
+<sourceObjName>I_RECIPE_CONTENT_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 BYTE</dataTypeSize>
+<ownDataTypeParameters>100 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="R_INGREDIENT_NAME" id="432B16B1-C35C-D3D7-6776-AD04C69BCDFC">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>IRECIPE</sourceObjSchema>
+<sourceObjName>R_INGREDIENT_NAME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="44E587F2-0525-3406-6ECD-E776D47E954D" referredColumn="602FF4FE-B94A-26CD-CAE6-1E3FF1FBB038"/>
+</associations>
+</Column>
+<Column name="I_INGREDIENT_NAME" id="3B82323D-C095-8ABC-CCFD-4B55BEC20077">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>IRECIPE</sourceObjSchema>
+<sourceObjName>I_INGREDIENT_NAME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0C66AA0E-6696-45D9-E25B-D0B7CC9A4C03" referredColumn="602FF4FE-B94A-26CD-CAE6-1E3FF1FBB038"/>
+</associations>
+</Column>
+<Column name="R_RECIPE_QUANTITY" id="D1184641-F873-5553-ABF8-F095A96D52BB">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>IRECIPE</sourceObjSchema>
+<sourceObjName>R_RECIPE_QUANTITY</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="I_RECIPE_QUANTITY" id="1F0639AE-2A3F-4C97-57AE-D0AA384041D1">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>IRECIPE</sourceObjSchema>
+<sourceObjName>I_RECIPE_QUANTITY</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="EF63E39D-4BB3-4F51-ED85-2CB73C0D940C" name="IRECIPE_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>IRECIPE_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E03B308B-0AA8-446A-B4EB-A76CB8134B0B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1AEBBEAC-CF54-2E3D-7EB9-7087390692FE" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="IRECIPE_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>IRECIPE_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E03B308B-0AA8-446A-B4EB-A76CB8134B0B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="80C6966F-F535-6C60-DB73-220BEEFE7EFC" name="FK_IRECIPE_I_INGREDIENT">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3B82323D-C095-8ABC-CCFD-4B55BEC20077"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="77310A8F-489A-B0BC-E4E9-E6A4792236B5" name="FK_IRECIPE_R_INGREDIENT">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="432B16B1-C35C-D3D7-6776-AD04C69BCDFC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

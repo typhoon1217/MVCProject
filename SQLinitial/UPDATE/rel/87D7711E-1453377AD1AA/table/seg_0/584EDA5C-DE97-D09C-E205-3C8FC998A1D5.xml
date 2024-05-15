@@ -1,0 +1,153 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="584EDA5C-DE97-D09C-E205-3C8FC998A1D5" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="AORDER">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>AORDER</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="AORDER_ID" id="9BB16313-12D1-EA1A-AE43-7CDFE81CD343">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>AORDER</sourceObjSchema>
+<sourceObjName>AORDER_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TABLE_NO" id="EFB1CE86-C493-F02E-218E-5C548B33BCD1">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>AORDER</sourceObjSchema>
+<sourceObjName>TABLE_NO</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FF59DCFA-0F60-DADF-22AA-88599950F07F" referredColumn="F5A682C5-1707-933D-8143-863291D02AC9"/>
+</associations>
+</Column>
+<Column name="CUSTOMER_ID" id="6AAA345C-655E-080E-8EB8-CC192662BB8A">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>AORDER</sourceObjSchema>
+<sourceObjName>CUSTOMER_ID</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0D3F9A65-2C89-AD3D-A3FD-FB302C821A12" referredColumn="C81B55C3-F6C9-014B-7B1E-C0BE1867724A"/>
+</associations>
+</Column>
+<Column name="AORDER_DATETIME" id="6E3EC5E0-2F06-7AE6-9B48-64C438FBDF21">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>AORDER</sourceObjSchema>
+<sourceObjName>AORDER_DATETIME</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ATOTAL_AMOUNT" id="2F79AEB3-C66C-2708-84DC-7D82889DEBEA">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>AORDER</sourceObjSchema>
+<sourceObjName>ATOTAL_AMOUNT</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AORDER_STATUS" id="D4E3672D-DED2-692A-68E6-5DAA89555605">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>AORDER</sourceObjSchema>
+<sourceObjName>AORDER_STATUS</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 BYTE</dataTypeSize>
+<ownDataTypeParameters>20 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AAE584C4-7D98-0ACB-EFEF-5A4F41B1DFD9" name="AORDER_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>AORDER_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9BB16313-12D1-EA1A-AE43-7CDFE81CD343"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A41A5BC5-96B0-3610-F270-3D1439BD3CD5" schemaObject="9CF195B5-6BD8-7182-CB98-28984237DD51" name="AORDER_PK">
+<sourceConnName>로컬-MVCREST</sourceConnName>
+<sourceObjSchema>MVCREST</sourceObjSchema>
+<sourceObjName>AORDER_PK</sourceObjName>
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:26 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9BB16313-12D1-EA1A-AE43-7CDFE81CD343"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="81453E37-B303-33A9-67DC-8DCBE990F0F4" name="FK_AORDERS_TABLE_NO">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EFB1CE86-C493-F02E-218E-5C548B33BCD1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C432D8A6-EE5E-E973-2C03-37A253DE842C" name="FK_AORDER_CUSTOMER_ID">
+<createdBy>vhrpe</createdBy>
+<createdTime>2024-05-13 13:21:27 UTC</createdTime>
+<ownerDesignName>UPDATE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6AAA345C-655E-080E-8EB8-CC192662BB8A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

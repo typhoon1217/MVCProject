@@ -1,0 +1,22 @@
+-- pk------------------------------------------------------------------------
+ALTER TABLE Income2405
+ADD CONSTRAINT Income2405_pk PRIMARY KEY (income_id);
+
+ALTER TABLE TotalSales
+MODIFY (sales_month PRIMARY KEY);
+
+ALTER TABLE Food
+MODIFY (food_id PRIMARY KEY);
+
+ALTER TABLE Inventory
+MODIFY (inventory_id PRIMARY KEY);
+
+ALTER TABLE Menu
+MODIFY (fod_id PRIMARY KEY);
+--uk------------------------------------------------------------------------
+-- fk------------------------------------------------------------------------
+ALTER TABLE Menu
+MODIFY (fod_id PRIMARY KEY);
+
+ALTER TABLE Inventory
+ADD CONSTRAINT fk_inventory_ingredient_name FOREIGN KEY (ingredients_name) REFERENCES ingredient(ingredient_name);

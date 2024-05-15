@@ -1,0 +1,26 @@
+--레시피표
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('프랜치 오니온 수프S', '오니온스프', 1);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('프랜치 오니온 수프S', '치즈', 30);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('프랜치 오니온 수프L', '오니온스프', 4);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('프랜치 오니온 수프L', '치즈', 120);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('오니온 수프', '양파', 1);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('오니온 수프', '버터', 50);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('오니온 수프', '소금', 50);
+
+INSERT INTO Recipe (food_name, ingredient_name, recipe_quantity)
+VALUES('오니온 수프', '설탕', 30);
+
+

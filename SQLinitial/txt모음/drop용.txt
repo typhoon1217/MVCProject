@@ -1,0 +1,13 @@
+drop용
+-- 모든 테이블 삭제
+DROP TABLE Income2405;
+DROP TABLE Expense2405;
+DROP TABLE TotalSales;
+DROP TABLE Menu;
+DROP TABLE Inventory;
+DROP TABLE Recipe;
+DROP TABLE Customers;
+DROP TABLE Employee;
+DROP TABLE Orders;
+DROP TABLE Order_Details;
+DROP TABLE rtable;
