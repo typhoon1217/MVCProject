@@ -24,7 +24,6 @@ public class ServerUtil {
         try {
             properties.load(new FileReader(filePath));
             int port = Integer.parseInt(properties.getProperty("port")); // 파일에서 포트 정보 가져오기
-
             System.out.println("Server start");
 
             try (ServerSocket ss = new ServerSocket(port)) { // 서버 소켓 생성

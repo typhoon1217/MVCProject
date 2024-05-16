@@ -2,16 +2,26 @@ package view;
 
 import java.net.Socket;
 
+import controller.FixedFee;
 import controller.SLoginDAO;
 import controller.SLoginManager;
 import controller.ServerUtil;
 
+//TODO db초기값 id 부분 랜덤 대신 문자+시퀸스로 변경
 public class SrMain {
 	public static void main(String[] args) {
+		FixedFee.setup();
 		ServerUtil.startServer(); // each client connection goes to new login
 		System.out.println("The end");
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	public static void loginServer(Socket s) {
 		String loginas = null;
 		System.out.println("직원 로그인 시도");
