@@ -26,7 +26,7 @@ public class SClientHandler {
     // 클라이언트로 문자열을 보냅니다.
     public void cSendString(Socket s, String m) {
         try {
-            PrintWriter writer = new PrintWriter(s.getOutputStream(), true);
+            PrintWriter writer = new PrintWriter(s.getOutputStream());
             writer.println(m);
         } catch (IOException e) {
 			System.out.println(s + "dis 오류");

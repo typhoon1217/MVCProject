@@ -1,7 +1,6 @@
 package controller;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -10,7 +9,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+
+import oracle.sql.DATE;
+import view.Fixed;
+import view.Transaction;
 
 //초기 계획: 백그라운드에서 계속 실행되고 날자를 가지고 와서 그 날자에 실행되는 프로그램 만들기
 //변경 계뢱: 어차피 볼때만 가지고오면 되지 않나 싶어서 볼때 호출하는 식으로 바꿈
@@ -18,15 +20,6 @@ import java.util.UUID;
 //특정 시간에 실행하게 할려면 초기 계획도 좋을듯 하지만 최소 날이 지나야되서 3차 계획이 제일 좋은 방법이라 생각됨. 
 
 public class FixedFee {
-	private static final String FIXED_EXPENSE_TABLE = "FIXED_EXPENSE";
-	private static final String ACCOUNTING_TABLE = "ACCOUNTING";
-	private static final String TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
-	private static final String TRANSACTION_TIME = "TRANSACTION_TIME";
-	private static final String TRANSACTION_DESCRIPTION = "TRANSACTION_DESCRIPTION";
-	private static final String FIXED_EXPENSE_PERIOD = "FIXED_EXPENSE_PERIOD";
-	private static final String FIXED_EXPENSE_DAY = "FIXED_EXPENSE_DAY";
-	private static final String FIXED_EXPENSE_NAME = "FIXED_EXPENSE_NAME";
-	private static final String FIXED_EXPENSE_AMOUNT = "FIXED_EXPENSE_AMOUNT";
 
 	public static void setup() {
 
@@ -42,26 +35,25 @@ public class FixedFee {
 			// 고정 지출 정보 조회 쿼리
 			String sql = "SELECT " 
 					//+ FIXED_EXPENSE_PERIOD + ", " 
-					+ FIXED_EXPENSE_DAY + ", " 
-					+ FIXED_EXPENSE_NAME + ", "
-					+ FIXED_EXPENSE_AMOUNT + " " 
-					+ "FROM " + FIXED_EXPENSE_TABLE;
-
+					+Fixed.EXPENSE_DAY + ", " 
+					+Fixed.EXPENSE_NAME + ", "
+					+Fixed.EXPENSE_AMOUNT + " " 
+					+ "FROM " + Fixed.EXPENSE_TABLE;
 			// PreparedStatement 생성
 			PreparedStatement stmt = con.prepareStatement(sql);
-
+			
 			// 쿼리 실행 및 ResultSet 객체 얻기
 			ResultSet rs = stmt.executeQuery();
 
 			// 회계 테이블에 삽입할 데이터 목록
-			List<Map<String, Object>> accountingData = new ArrayList<>();
+			List<Map<String, Object>> montlyFixedFee = new ArrayList<>();
 
 			// 고정 지출 정보 처리
 			while (rs.next()) {
 				//int period = rs.getInt(FIXED_EXPENSE_PERIOD); // 주기
-				int fixedExpenseDay = rs.getInt(FIXED_EXPENSE_DAY); // 지출 일 (27일 등)
-				String fixedExpenseName = rs.getString(FIXED_EXPENSE_NAME); // 지출 명칭
-				double fixedExpenseAmount = rs.getDouble(FIXED_EXPENSE_AMOUNT); // 지출 금액
+				int fixedExpenseDay = rs.getInt(Fixed.EXPENSE_DAY); // 지출 일 (27일 등)
+				String fixedExpenseName = rs.getString(Fixed.EXPENSE_NAME); // 지출 명칭
+				double fixedExpenseAmount = rs.getDouble(Fixed.EXPENSE_AMOUNT); // 지출 금액
 
 				// 지출 시기 계산
 				Calendar expenseCalendar = Calendar.getInstance();
@@ -71,43 +63,36 @@ public class FixedFee {
 				if (expenseCalendar.getTimeInMillis() <= calendar.getTimeInMillis()) {
 					// 지출 시기가 현재 날짜 이전 또는 같은 경우 회계 테이블에 삽입
 					Map<String, Object> data = new HashMap<>();
-					data.put(TRANSACTION_AMOUNT, fixedExpenseAmount); // 거래 금액
-					data.put(TRANSACTION_TIME, new Timestamp(expenseCalendar.getTimeInMillis())); // 거래 시간
-					data.put(TRANSACTION_DESCRIPTION, fixedExpenseName + " 지출"); // 거래 설명
-					accountingData.add(data);
+					data.put(Transaction.AMOUNT, fixedExpenseAmount); // 거래 금액
+					data.put(Transaction.TIME, new DATE(expenseCalendar.get())); // 거래 시간
+					data.put(Transaction.DESCRIPTION, fixedExpenseName + " 지출"); // 거래 설명
+					montlyFixedFee.add(data);
 				}
 			}
-
 			// 회계 테이블에 데이터 삽입
-			if (!accountingData.isEmpty()) {
-				insertAccountingData(con, accountingData);
+			if (!montlyFixedFee.isEmpty()) {
+				updateFixedFee(con, montlyFixedFee);
 			}
-
 			// 연결 종료
 			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 
-	private static void insertAccountingData(Connection conn, List<Map<String, Object>> data) throws Exception {
+	private static void updateFixedFee(Connection conn, List<Map<String, Object>> data) throws Exception {
 		// PreparedStatement 생성
-		String insertQuery = "INSERT INTO " + ACCOUNTING_TABLE + " (" + TRANSACTION_AMOUNT + ", " + TRANSACTION_TIME
-				+ ", " + TRANSACTION_DESCRIPTION + ") VALUES (?, ?, ?)";
+		String insertQuery = "INSERT INTO " + Transaction.TABLE + " (" + Transaction.AMOUNT + ", " + Transaction.TIME
+				+ ", " + Transaction.DESCRIPTION + ") VALUES (?, ?, ?)";
 		PreparedStatement stmt = conn.prepareStatement(insertQuery);
 
 		for (Map<String, Object> entry : data) {
-			stmt.setDouble(1, (Double) entry.get(TRANSACTION_AMOUNT)); 
-			stmt.setTimestamp(2, (Timestamp) entry.get(TRANSACTION_TIME)); 
-			stmt.setString(3, (String) entry.get(TRANSACTION_DESCRIPTION)); 
+			stmt.setDouble(1, (Double) entry.get(Transaction.AMOUNT)); 
+			stmt.setTimestamp(2, (Timestamp) entry.get(Transaction.TIME)); 
+			stmt.setString(3, (String) entry.get(Transaction.DESCRIPTION)); 
 			stmt.addBatch(); // Add the current record to the batch
 		}
-
-		// Execute batch insert
 		stmt.executeBatch();
-
-		// Close the PreparedStatement
 		stmt.close();
 	}
 }
