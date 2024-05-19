@@ -1,135 +1,145 @@
-
 DROP TABLE Order_Details;
 DROP TABLE aOrder;
 DROP TABLE Customers;
---DROP TABLE Orders;
 DROP TABLE rtable;
 DROP TABLE Employee;
 
--- 고객 관리 테이블    --추후 추가용
+DROP SEQUENCE aOrder_seq;
+DROP SEQUENCE Order_Details_seq;
+
+DROP TABLE requestOrder;
+DROP TABLE Inventory;
+DROP TABLE Recipe;
+DROP TABLE iRecipe;
+DROP TABLE Menu;
+DROP TABLE Ingredient;
+
+DROP SEQUENCE requestOrder_seq;
+DROP SEQUENCE Inventory_seq;
+DROP SEQUENCE Recipe_seq;
+DROP SEQUENCE iRecipe_seq;
+
+-- 고객 관리 테이블
 CREATE TABLE Customers (
-    customer_id              VARCHAR2(10)    NOT NULL, --PK
-    customer_name            VARCHAR2(50)    NOT NULL,
-    customer_email           VARCHAR2(100)   , --UK
-    customer_phone_number    VARCHAR2(20)    , --UK
-    customer_address         VARCHAR2(200)   ,
+    customer_id              VARCHAR2(20)    NOT NULL, -- PK
+    customer_name            NVARCHAR2(5)    NOT NULL, -- 한글 5글자
+    customer_email           VARCHAR2(100),  -- UK
+    customer_phone_number    NUMBER,         -- 숫자
+    customer_address         NVARCHAR2(50),  -- 한글 50자
     customer_grade           VARCHAR2(20)    NOT NULL
 );
 
 -- 직원 관리 테이블
 CREATE TABLE Employee (
-    emp_id            VARCHAR2(10)    NOT NULL, --PK
-    emp_password      VARCHAR2(10)    NOT NULL,
-    emp_name          VARCHAR2(20)    NOT NULL,
-    emp_manager       VARCHAR2(20)    ,--null=상사없음
+    emp_id            VARCHAR2(20)    NOT NULL, -- PK
+    emp_password      VARCHAR2(20)    NOT NULL,
+    emp_name          NVARCHAR2(5)    NOT NULL, -- 한글 5글자
+    emp_manager       NVARCHAR2(5),   -- 한글 5글자, null=상사 없음
     emp_department    VARCHAR2(10)    NOT NULL,
-    emp_contact       VARCHAR2(20)    NOT NULL, --UK
+    emp_phone_number  NUMBER,         -- 숫자
+    emp_email         VARCHAR2(100),  -- UK
     emp_salary        NUMBER          NOT NULL
---start_date      DATE            NOT NULL,
---work_hours      NUMBER          NOT NULL,
---commission      NUMBER          NOT NULL
 );
 
---테이블관리 테이블
-CREATE TABLE rtable(
-    table_no                VARCHAR2(3) NOT NULL  --좌석y축2자리 알파벳1개 좌석 x축 2자리 숫자
---    seat_status             VARCHAR2(10) NOT NULL
--- 인원수 추가?
+-- 테이블 관리 테이블
+CREATE TABLE rtable (
+    table_no                NUMBER NOT NULL  -- 숫자 루트로 좌석 테이블 그릴 예정
 );
 
---테이블 당 주문들--  직원정보는 그냥 따로 저장안해도 될듯 너무 복잡해짐
---CREATE TABLE Orders (
---    orders_id               VARCHAR2(20)    NOT NULL, --pk
---    emp_id                  VARCHAR2(10)    NOT NULL,   --fk 직원(담당직원)    
---    table_no                VARCHAR2(3)     NOT NULL --fk테이블 
---);
---주문 테이블당 주문이 여러개이기 때문
-CREATE TABLE aOrder ( 
-    aorder_id               VARCHAR2(20)    NOT NULL, --pk
---    orders_id               VARCHAR2(20)    NOT NULL, --fk orders
-    table_no                VARCHAR2(3)     NOT NULL, --fk테이블  추가됨
-    customer_id             VARCHAR2(10)    , --fk 고객 null 고객정보 미입력
+-- 테이블 당 주문들 관리 테이블
+CREATE TABLE aOrder (
+    aorder_id               VARCHAR2(10)    NOT NULL, -- PK
+    table_no                NUMBER          NOT NULL, -- FK rtable
+    customer_id             VARCHAR2(20),   -- FK Customers, null 가능
     aorder_datetime         TIMESTAMP       NOT NULL,
     atotal_amount           NUMBER          NOT NULL,
-    aorder_status           VARCHAR2(20)    NOT NULL  --list cooking served payed 
-
+    aorder_status           VARCHAR2(20)    NOT NULL  -- list: cooking, served, paid
 );
---drop table orders;
--- 주문 상세 관리 테이블 조인용 주문하나당 음식 여러개를 보유하기 때문
+
+-- 주문 상세 관리 테이블
 CREATE TABLE Order_Details (
-    order_detail_id VARCHAR2(20)    NOT NULL,    --pk
-    aorder_id       VARCHAR2(20)    NOT NULL,   --fk aOrder
-    food_name       VARCHAR2(50)    NOT NULL,   --fk menu
-    --food_price      NUMBER          NOT NULL,   --조인으로 가져오기
-    order_quantity  NUMBER          NOT NULL
+    order_detail_id         VARCHAR2(10)    NOT NULL, -- PK
+    aorder_id               VARCHAR2(10)    NOT NULL, -- FK aOrder 
+    food_name               NVARCHAR2(20)   NOT NULL, -- FK menu
+    order_quantity          NUMBER          NOT NULL
+);
+
+-- 메뉴 테이블
+CREATE TABLE Menu (
+    food_name           NVARCHAR2(20) NOT NULL, -- PK
+    food_price          NUMBER NOT NULL,
+    food_description    NVARCHAR2(50),
+    food_category       NVARCHAR2(15)
+);
+
+-- 재료 테이블
+CREATE TABLE Ingredient (           
+    ingredient_name     NVARCHAR2(20) NOT NULL, -- PK
+    ingredient_unit     NVARCHAR2(10) NOT NULL
+);
+
+-- 레시피 관리 테이블
+CREATE TABLE Recipe (  
+    recipe_content_id   VARCHAR2(10) NOT NULL, -- PK
+    food_name           NVARCHAR2(20) NOT NULL, -- FK 메뉴 테이블과의 연결을 위한 외래 키
+    ingredient_name     NVARCHAR2(20) NOT NULL, -- FK 제료 DB  
+    recipe_quantity     NUMBER NOT NULL
+);
+
+-- 재료로 재료 만들기 레시피 관리 테이블
+CREATE TABLE iRecipe (
+    i_recipe_content_id VARCHAR2(10) NOT NULL, -- PK
+    r_ingredient_name   NVARCHAR2(20) NOT NULL, -- FK 제료 DB
+    i_ingredient_name   NVARCHAR2(20) NOT NULL, -- FK 제료 DB  
+    r_recipe_quantity   NUMBER NOT NULL, -- 결과재료수
+    i_recipe_quantity   NUMBER NOT NULL
+);
+
+-- 재고 관리 테이블
+CREATE TABLE Inventory (
+    inventory_id        VARCHAR2(10) NOT NULL, -- PK
+    ingredient_name     NVARCHAR2(20) NOT NULL, -- FK 제료 DB, 복수 존재 가능 유통기한별
+    inventory_quantity  NUMBER NOT NULL,
+    expiry_date         DATE -- 없는 품목도 있음
+);
+
+-- 발주 요청 테이블
+CREATE TABLE requestOrder (
+    request_id          NVARCHAR2(5) NOT NULL, -- PK
+    ingredient_name     NVARCHAR2(50) NOT NULL,
+    request_quantity    NUMBER
 );
 
 --pk
-ALTER TABLE Customers
-ADD CONSTRAINT Customers_pk PRIMARY KEY (customer_id);
-
-ALTER TABLE Employee
-ADD CONSTRAINT Employee_pk PRIMARY KEY (emp_id);
-
---ALTER TABLE Orders
---ADD CONSTRAINT Orders_pk PRIMARY KEY (orders_id);
-
-ALTER TABLE aOrder
-ADD CONSTRAINT aOrder_pk PRIMARY KEY (aorder_id);
-
-ALTER TABLE Order_Details
-ADD CONSTRAINT Order_Details_pk PRIMARY KEY (order_detail_id);
-
-ALTER TABLE rtable
-ADD CONSTRAINT rtable_pk PRIMARY KEY (table_no);
-
+ALTER TABLE Customers ADD CONSTRAINT Customers_pk PRIMARY KEY (customer_id);
+ALTER TABLE Employee ADD CONSTRAINT Employee_pk PRIMARY KEY (emp_id);
+ALTER TABLE aOrder ADD CONSTRAINT aOrder_pk PRIMARY KEY (aorder_id);
+ALTER TABLE Order_Details ADD CONSTRAINT Order_Details_pk PRIMARY KEY (order_detail_id);
+ALTER TABLE rtable ADD CONSTRAINT rtable_pk PRIMARY KEY (table_no);
+ALTER TABLE Menu ADD CONSTRAINT Menu_pk PRIMARY KEY (food_name);
+ALTER TABLE Ingredient ADD CONSTRAINT Ingredient_pk PRIMARY KEY (ingredient_name);
+ALTER TABLE Recipe ADD CONSTRAINT Recipe_pk PRIMARY KEY (recipe_content_id);
+ALTER TABLE iRecipe ADD CONSTRAINT iRecipe_pk PRIMARY KEY (i_recipe_content_id);
+ALTER TABLE Inventory ADD CONSTRAINT Inventory_pk PRIMARY KEY (inventory_id);
+ALTER TABLE requestOrder ADD CONSTRAINT requestOrder_pk PRIMARY KEY (request_id);
 
 --uk
-ALTER TABLE Customers
-ADD UNIQUE(customer_email);
+ALTER TABLE Customers ADD CONSTRAINT customer_email_uk UNIQUE (customer_email);
+ALTER TABLE Customers ADD CONSTRAINT customer_phone_number_uk UNIQUE (customer_phone_number);
+ALTER TABLE Employee ADD CONSTRAINT emp_phone_number_uk UNIQUE (emp_phone_number);
+ALTER TABLE Inventory ADD CONSTRAINT Inventory_ingredient_name_uk UNIQUE (ingredient_name);
+ALTER TABLE requestOrder ADD CONSTRAINT requestOrder_ingredient_name_uk UNIQUE (ingredient_name);
 
-ALTER TABLE Customers
-ADD UNIQUE(customer_phone_number);
-
-ALTER TABLE Employee
-ADD UNIQUE(emp_contact);
 
 --fk
---ALTER TABLE Orders
---ADD CONSTRAINT fk_Orders_emp_id FOREIGN KEY (emp_id) REFERENCES Employee(emp_id);
+ALTER TABLE aOrder ADD CONSTRAINT fk_aOrder_table_no FOREIGN KEY (table_no) REFERENCES rtable(table_no);
+ALTER TABLE aOrder ADD CONSTRAINT fk_aOrder_customer_id FOREIGN KEY (customer_id) REFERENCES Customers(customer_id);
+ALTER TABLE Order_Details ADD CONSTRAINT fk_Order_Details_aorder_id FOREIGN KEY (aorder_id) REFERENCES aOrder(aorder_id);
+ALTER TABLE Order_Details ADD CONSTRAINT fk_Order_Details_food_name FOREIGN KEY (food_name) REFERENCES Menu(food_name);
+ALTER TABLE Recipe ADD CONSTRAINT fk_recipe_menu FOREIGN KEY (food_name) REFERENCES Menu(food_name);
+ALTER TABLE Recipe ADD CONSTRAINT fk_recipe_ingredient FOREIGN KEY (ingredient_name) REFERENCES Ingredient(ingredient_name);
+ALTER TABLE iRecipe ADD CONSTRAINT fk_iRecipe_r_ingredient FOREIGN KEY (r_ingredient_name) REFERENCES Ingredient(ingredient_name);
+ALTER TABLE iRecipe ADD CONSTRAINT fk_iRecipe_i_ingredient FOREIGN KEY (ingredient_name) REFERENCES Ingredient(ingredient_name);
+ALTER TABLE Inventory ADD CONSTRAINT fk_inventory_ingredient FOREIGN KEY (ingredient_name) REFERENCES Ingredient(ingredient_name);
+ALTER TABLE requestOrder ADD CONSTRAINT fk_requestorder_ingredient FOREIGN KEY (ingredient_name) REFERENCES Ingredient(ingredient_name);
 
---ALTER TABLE Orders
---ADD CONSTRAINT fk_Orders_table_no FOREIGN KEY (table_no) REFERENCES rtable(table_no);
-
-
-ALTER TABLE aOrder --추가됨
-ADD CONSTRAINT fk_aOrders_table_no FOREIGN KEY (table_no) REFERENCES rtable(table_no);
-
---ALTER TABLE aOrder
---ADD CONSTRAINT fk_aOrder_orders_id FOREIGN KEY (orders_id) REFERENCES Orders(orders_id);
-
-ALTER TABLE aOrder
-ADD CONSTRAINT fk_aOrder_customer_id FOREIGN KEY (customer_id) REFERENCES Customers(customer_id);
-
-
-ALTER TABLE Order_Details
-ADD CONSTRAINT fk_Order_Details_aorder_id FOREIGN KEY (aorder_id) REFERENCES aOrder(aorder_id);
-
-ALTER TABLE Order_Details
-ADD CONSTRAINT fk_Order_Details_food_name FOREIGN KEY (food_name) REFERENCES menu(food_name);
-
---price는 조인으로 가져오기 
-
---조건 추가
---ALTER TABLE rtable
---ADD CONSTRAINT ck_seat_status CHECK (seat_status IN ('empty', 'occupied', 'disable'));
-
-SELECT * FROM Order_Details;
-SELECT * FROM aOrder;
-SELECT * FROM Customers;
-SELECT * FROM rtable;
-SELECT * FROM Employee;
-
-SELECT EMP_DEPARTMENT FROM Employee WHERE EMP_ID = 'admin123' AND EMP_PASSWORD = 'Qwer!234';
-
-SELECT EMP_DEPARTMENT FROM Employee WHERE EMP_ID = 'admin123';

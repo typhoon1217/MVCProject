@@ -10,10 +10,11 @@ public class ClientUtill {
 	private static final String FILE_PATH = "./ct.properties";
 	private static final int MAX_RETRIES = 5;
 	private static final int RETRY_INTERVAL = 5000; // milliseconds
-	public static Socket cs = null;
+	//public static Socket cs = null; //의도대로 동작하지 않기때문에 지역변수로 변경 다시 접속할대 여기 할당된 값때문에 넘어감 
 	
 	
-	public static Socket createClientSocket() {
+	public Socket createClientSocket() {
+		Socket cs = null;
 		int retryCount = 0;
 
 		while (cs == null && retryCount < MAX_RETRIES) {
@@ -45,5 +46,11 @@ public class ClientUtill {
 		}
 
 		return cs;
+	}
+
+
+	public static String clientID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

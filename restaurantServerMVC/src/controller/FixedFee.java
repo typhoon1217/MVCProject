@@ -64,7 +64,7 @@ public class FixedFee {
 					// 지출 시기가 현재 날짜 이전 또는 같은 경우 회계 테이블에 삽입
 					Map<String, Object> data = new HashMap<>();
 					data.put(Transaction.AMOUNT, fixedExpenseAmount); // 거래 금액
-					data.put(Transaction.TIME, new DATE(expenseCalendar.get())); // 거래 시간
+					//data.put(Transaction.TIME, new DATE(expenseCalendar.get())); // 거래 시간
 					data.put(Transaction.DESCRIPTION, fixedExpenseName + " 지출"); // 거래 설명
 					montlyFixedFee.add(data);
 				}

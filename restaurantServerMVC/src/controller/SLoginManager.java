@@ -1,49 +1,79 @@
 package controller;
 
+import java.io.IOException;
 import java.net.Socket;
 
+import model.SValidation;
 import view.MenuChoice;
 
 public class SLoginManager {
+    public static int maxAttempts = 5; // 최대 시도 횟수
 
-	public static String loginValidation(Socket s) {
-		SClientHandler sch = new SClientHandler();
-		String dep = MenuChoice.FAIL;
-		boolean flag = false;
-		int maxTry = 5;
-		int attempt = 0;
+    public static String loginValidation(Socket s, String cID) {
+        SValidation val = new SValidation();
+        String dep = MenuChoice.FAIL;
+        String msg = MenuChoice.FAIL;
+        SClientHandler sch = null;
 
-		while (attempt < maxTry) {
-			String id;
-			String pw;
+        try {
+            sch = new SClientHandler(s);
+        } catch (IOException e) {
+            System.out.print("sch 에러: ");
+            e.printStackTrace();
+            return "sch 에러";
+        }
 
-			SValidation val = new SValidation();
+        // 최근 30분 동안의 로그인 시도 횟수를 확인
+        int recentAttempts = ClientIDDAO.getRecentLoginAttempts(cID);
 
-			id = sch.cGetString(s);
-			flag = val.checkID(id);// 정규식 검사
-			System.out.println(s + ":" + id + "받음");
+        while (recentAttempts < maxAttempts) {
+            String id = sch.receive();
+            String pw = sch.receive();
+            System.out.println("ID: " + id + " 받음");
+            System.out.println("PW: " + pw + " 받음"); 
 
-			pw = sch.cGetString(s);
-			flag = val.checkPW(pw);// 정규식 검사
-			System.out.println(s + ":" + "pw" + "받음"); // 비밀번호 숨기기 "pw" 보여주기 pw
+            // 로그인 시도 기록 남기기
+            ClientIDDAO.logLoginAttempt(cID);
+            recentAttempts = ClientIDDAO.getRecentLoginAttempts(cID);
 
-			if (flag) {
-				dep = SLoginDAO.loginAndGetDepartment(id, pw); // DB로 확인후 부서 받아옴
-				sch.cSendString(s, dep);
-				return dep;
-			} else {
-				System.out.println("로그인 실패");
-				System.out.print("남은횟수:");
-				System.out.println(maxTry - (attempt + 1)); // 남은 시도 횟수 출력
-				attempt++; // 시도 횟수 증가
-			}
-		}
+            if (!val.checkID(id) || !val.checkPW(pw)) {
+                dep = "Err";
+                msg = "클라이언트 변조";
+                sch.send(dep);
+                sch.send(msg);
+                return dep;
+            }
+            // DB로 확인 후 부서 받아옴
+            dep = SLoginDAO.loginAndGetDepartment(id, pw); 
+            if (!dep.equals(MenuChoice.FAIL)) {
+            	// 로그인 성공 시 로그인 시도 횟수 초기화
+                ClientIDDAO.resetLoginAttempts(cID);
+                msg = "PASS";
+                sch.send(dep);
+                sch.send(msg);
+                return dep;
+            } else {
+                if (recentAttempts < maxAttempts) {
+                    msg = "로그인 실패, 남은 횟수: " + (maxAttempts - recentAttempts);
+                    System.out.println(msg); // 남은 시도 횟수 출력
+                    sch.send(MenuChoice.FAIL);
+                    sch.send(msg);
+                } else {
+                    dep = "문제 발생";
+                    msg = "서버: 5회 접속 실패";
+                    sch.send(dep);
+                    sch.send(msg);
+                    return dep;
+                }
+            }
+        }
 
-		if (attempt >= maxTry) {
-			dep = "failed5time";
-		}
-
-		sch.cSendString(s, dep); // 로그인 실패 메시지 전송
-		return dep;
-	}
+        // 5회 접속 실패 시 실행되는 코드
+        dep = "문제 발생";
+        msg = "서버: 5회 접속 실패";
+        sch.send(dep);
+        sch.send(msg);
+        return dep;
+    }
 }
+

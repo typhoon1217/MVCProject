@@ -1,12 +1,13 @@
-DROP TABLE ACCOUNTING; 
-DROP TABLE TOTALSALES;
+DROP TABLE Accounting;
+DROP TABLE TotalSales;
+
 --------------------------------------------------------------------------------
 -- 회계 관리 테이블 생성
 CREATE TABLE Accounting (
-    transaction_id      VARCHAR2(10)   NOT NULL, -- 결제시 랜덤 생성 트리거 
+    transaction_id      VARCHAR2(20)   NOT NULL, -- 결제시 생성 트리거 
     transaction_amount  NUMBER         NOT NULL,
     transaction_time    TIMESTAMP      NOT NULL, -- 거래 시간
-    transaction_description VARCHAR2(90)    -- 거래 설명 한글30자
+    transaction_description NVARCHAR2(30)    -- 거래 설명 한글30자
 );
 
 -- 총 월별매출 테이블 생성  (SYSDATE YYMM 로 월별 테이블 생성)
@@ -17,7 +18,6 @@ CREATE TABLE TotalSales(
     sales_netProfit     NUMBER  
 );
 
-
 -- Accounting 테이블에 프라이머리 키 추가
 ALTER TABLE Accounting
 ADD CONSTRAINT accounting_pk PRIMARY KEY (transaction_id);
@@ -26,16 +26,19 @@ ADD CONSTRAINT accounting_pk PRIMARY KEY (transaction_id);
 ALTER TABLE TotalSales
 ADD CONSTRAINT totalsales_pk PRIMARY KEY (sales_month);
 
---트리거 결제 아이디 자동생성 --추후 입력방식 수정하면 좋을듯? 
+-- 시퀀스 생성
+CREATE SEQUENCE transaction_seq START WITH 1 INCREMENT BY 1;
+
+-- 트리거: 결제 아이디 자동생성
 CREATE OR REPLACE TRIGGER generate_transaction_id
 BEFORE INSERT ON Accounting
 FOR EACH ROW
 BEGIN
-    :NEW.transaction_id := DBMS_RANDOM.STRING('X', 10); -- 랜덤한 20자리 문자열 생성
+    :NEW.transaction_id := 'TID' || TO_CHAR(transaction_seq.NEXTVAL, 'FM00000000'); -- 시퀀스를 사용하여 고유한 ID 생성
 END;
 /
 
---트리거 월별매출입력시 월별매출 등록  
+-- 트리거: 월별 매출 계산 및 업데이트
 CREATE OR REPLACE TRIGGER cal_totalsales
 AFTER INSERT ON Accounting
 FOR EACH ROW
@@ -64,29 +67,27 @@ BEGIN
 END;
 /
 
---아래는 테스트 부분----------------
 -- 초기값 어카운팅------------------
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (13000,SYSTIMESTAMP,'판매');
+VALUES (13000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (-100000,SYSTIMESTAMP,'물품수리');
+VALUES (-100000, SYSTIMESTAMP, '물품수리');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (103000,SYSTIMESTAMP,'판매');
+VALUES (103000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (43000,SYSTIMESTAMP,'판매');
+VALUES (43000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (103000,SYSTIMESTAMP,'판매');
+VALUES (103000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (43000,SYSTIMESTAMP,'판매');
+VALUES (43000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (103000,SYSTIMESTAMP,'판매');
+VALUES (103000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (43000,SYSTIMESTAMP,'판매');
+VALUES (43000, SYSTIMESTAMP, '판매');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (-130000,SYSTIMESTAMP,'발주');
+VALUES (-130000, SYSTIMESTAMP, '발주');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
-VALUES (6000,SYSTIMESTAMP,'파란 우산 두고 가셨어요');
-
+VALUES (6000, SYSTIMESTAMP, '파란 우산 두고 가셨어요');
 
 -- 고정 값 몇 개 생성
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
@@ -110,9 +111,10 @@ VALUES (-130000, TIMESTAMP '2024-03-09 14:30:45', '발주');
 INSERT INTO Accounting (transaction_amount, transaction_time, transaction_description)
 VALUES (6000, TIMESTAMP '2024-10-13 09:15:30', '파란 우산 두고 가셨어요');
 
--- -----------------
+-- 테스트용 조회
 SELECT * FROM Accounting;
 SELECT * FROM TotalSales;
+
 
 
 --DROP TABLE Accounting;

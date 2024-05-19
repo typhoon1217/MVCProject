@@ -7,32 +7,52 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import view.MenuChoice;
 
-//TODO 쓰레드풀에서 해당 작업 종료클라이언트 측에 에러 리스너 추가하고 에러정보 보내기 
+// 서버
 public class SClientHandler {
-	//기본 문자열 입력
-	public String cGetString(Socket s) {
-		try {
-			String ci = MenuChoice.FAIL;
-			BufferedReader reader = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			ci = reader.readLine();
-			return ci;
-		} catch (IOException e) {
-			System.out.println(s + "dis 오류");
-			e.printStackTrace();
-	        return MenuChoice.FAIL;
-		}
-	}
+	private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
 
-    // 클라이언트로 문자열을 보냅니다.
-    public void cSendString(Socket s, String m) {
-        try {
-            PrintWriter writer = new PrintWriter(s.getOutputStream());
-            writer.println(m);
-        } catch (IOException e) {
-			System.out.println(s + "dis 오류");
-            System.out.println("클라이언트에게 메시지를 보낼 수 없습니다: " + e.getMessage());
+    // 생성자
+    public SClientHandler(Socket s) throws IOException {
+        this.socket = s;
+        this.out = new PrintWriter(s.getOutputStream(), true);
+        this.in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        System.out.println("Connected to the server.");
+    }
+
+
+    // 클라이언트로 문자열 전송
+    public void send(String i) {
+        if (out != null) {
+            out.println(i);
         }
     }
-	
+
+    // 클라이언트로부터 응답
+    public String receive(){
+        if (in != null) {
+            try {
+				return in.readLine();
+			} catch (IOException e) {
+				System.out.println("서버 응답오류");
+				e.printStackTrace();
+			}
+        }
+        return MenuChoice.FAIL;
+    }
+
+    // 연결 종료
+    public void closeConnection() {
+        try {
+            if (in != null) in.close();
+            if (out != null) out.close();
+            if (socket != null) socket.close();
+            System.out.println("Connection closed.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
 

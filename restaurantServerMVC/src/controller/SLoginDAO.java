@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.EmpVo;
 import view.MenuChoice;
 
 public class SLoginDAO {
@@ -17,7 +16,6 @@ public class SLoginDAO {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        EmpVo evo = null;
         
         try {
             con = DBUtil.getConnection();
