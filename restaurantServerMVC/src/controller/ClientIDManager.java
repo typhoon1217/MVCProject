@@ -2,17 +2,16 @@ package controller;
 
 import java.io.IOException;
 import java.net.Socket;
-import model.SValidation;
 import view.MenuChoice;
 
 public class ClientIDManager {
     // 서버
     // 클라이언트 ID 확인 및 처리
-    public static String IDCheck(Socket s) {
-        SValidation val = new SValidation();
+    public String IDCheck(Socket s) {
         String msg = MenuChoice.FAIL;
         SClientHandler sch = null;
         String clientID;
+        ClientIDDAO clDAO = new ClientIDDAO();
 
         try {
             sch = new SClientHandler(s);
@@ -27,7 +26,7 @@ public class ClientIDManager {
 
         if ("empty".equals(clientID)) {
             // ID가 없을 시 새로 생성
-            clientID = ClientIDDAO.generateIDFromDB();
+            clientID = clDAO.generateIDFromDB();
             msg = "new";
             if(MenuChoice.FAIL.equals(clientID)) {
             	return MenuChoice.FAIL;
@@ -37,9 +36,9 @@ public class ClientIDManager {
             return clientID;
         } else {
             // ID가 있을 시 확인 후 결과 반환
-            if (ClientIDDAO.checkClientIDExists(clientID)) {
+            if (clDAO.checkClientIDExists(clientID)) {
                 // 최근 30분 동안의 로그인 시도 횟수를 확인
-                int recentAttempts = ClientIDDAO.getRecentLoginAttempts(clientID);
+                int recentAttempts = clDAO.getRecentLoginAttempts(clientID);
                 if (recentAttempts >= SLoginManager.maxAttempts) {
                 	clientID = "30분 내 "+"maxAttempts"+"회 로그인 실패. 로그인 차단.";
                 	msg = MenuChoice.FAIL; //종료시킬려면 이걸 보내야됨

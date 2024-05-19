@@ -15,7 +15,7 @@ public class MenuViewer {
 //클라이언트!
 	
 	// 관리자 메뉴
-	public static void mainMenuView() {
+	public static void adminMenuView() {
 		System.out.println();
 		prBar();
 		System.out.println("관리자 클라이언트");

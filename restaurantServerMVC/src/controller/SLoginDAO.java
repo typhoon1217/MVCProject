@@ -9,7 +9,7 @@ import view.MenuChoice;
 
 public class SLoginDAO {
     
-    public static String loginAndGetDepartment(String id, String password) {
+    public String loginAndGetDepartment(String id, String password) {
         String department = MenuChoice.FAIL;
         
         String sql = "SELECT EMP_DEPARTMENT FROM Employee WHERE EMP_ID = ? AND EMP_PASSWORD = ?";
@@ -18,7 +18,10 @@ public class SLoginDAO {
         ResultSet rs = null;
         
         try {
-            con = DBUtil.getConnection();
+
+	        DBUtil dbu = new DBUtil();
+			con = dbu.getConnection();
+			
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             pstmt.setString(2, password);

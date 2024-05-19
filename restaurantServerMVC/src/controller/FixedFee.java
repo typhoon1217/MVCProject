@@ -21,10 +21,11 @@ import view.Transaction;
 
 public class FixedFee {
 
-	public static void setup() {
+	public void setup() {
 
 		try {
-			Connection con = DBUtil.getConnection();
+	        DBUtil dbu = new DBUtil();
+			Connection con = dbu.getConnection();
 
 			// 현재 날짜 정보 가져오기
 			Calendar calendar = Calendar.getInstance();
@@ -80,7 +81,7 @@ public class FixedFee {
 		}
 	}
 
-	private static void updateFixedFee(Connection conn, List<Map<String, Object>> data) throws Exception {
+	private void updateFixedFee(Connection conn, List<Map<String, Object>> data) throws Exception {
 		// PreparedStatement 생성
 		String insertQuery = "INSERT INTO " + Transaction.TABLE + " (" + Transaction.AMOUNT + ", " + Transaction.TIME
 				+ ", " + Transaction.DESCRIPTION + ") VALUES (?, ?, ?)";

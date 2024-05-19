@@ -9,11 +9,13 @@ import view.MenuChoice;
 public class SLoginManager {
     public static int maxAttempts = 5; // 최대 시도 횟수
 
-    public static String loginValidation(Socket s, String cID) {
+    public String loginValidation(Socket s, String cID) {
         SValidation val = new SValidation();
         String dep = MenuChoice.FAIL;
         String msg = MenuChoice.FAIL;
         SClientHandler sch = null;
+        ClientIDDAO ciDAO = new ClientIDDAO();
+        SLoginDAO slDAO = new SLoginDAO();
 
         try {
             sch = new SClientHandler(s);
@@ -24,7 +26,7 @@ public class SLoginManager {
         }
 
         // 최근 30분 동안의 로그인 시도 횟수를 확인
-        int recentAttempts = ClientIDDAO.getRecentLoginAttempts(cID);
+        int recentAttempts = ciDAO.getRecentLoginAttempts(cID);
 
         while (recentAttempts < maxAttempts) {
             String id = sch.receive();
@@ -33,8 +35,8 @@ public class SLoginManager {
             System.out.println("PW: " + pw + " 받음"); 
 
             // 로그인 시도 기록 남기기
-            ClientIDDAO.logLoginAttempt(cID);
-            recentAttempts = ClientIDDAO.getRecentLoginAttempts(cID);
+            ciDAO.logLoginAttempt(cID);
+            recentAttempts = ciDAO.getRecentLoginAttempts(cID);
 
             if (!val.checkID(id) || !val.checkPW(pw)) {
                 dep = "Err";
@@ -44,10 +46,10 @@ public class SLoginManager {
                 return dep;
             }
             // DB로 확인 후 부서 받아옴
-            dep = SLoginDAO.loginAndGetDepartment(id, pw); 
+            dep = slDAO.loginAndGetDepartment(id, pw); 
             if (!dep.equals(MenuChoice.FAIL)) {
             	// 로그인 성공 시 로그인 시도 횟수 초기화
-                ClientIDDAO.resetLoginAttempts(cID);
+            	ciDAO.resetLoginAttempts(cID);
                 msg = "PASS";
                 sch.send(dep);
                 sch.send(msg);

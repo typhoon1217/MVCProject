@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DBUtil {
-	public static Connection getConnection() {
+	public Connection getConnection() {
 
 		String filePath = "./db.properties";
 		Connection con = null;

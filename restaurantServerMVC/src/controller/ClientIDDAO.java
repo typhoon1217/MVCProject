@@ -9,12 +9,13 @@ import view.MenuChoice;
 
 public class ClientIDDAO {
     // 데이터베이스에서 ID 생성 메서드
-    public static String generateIDFromDB() {
+    public String generateIDFromDB() {
         String newCID = null;
         String insertSql = "INSERT INTO client_ids (client_id) VALUES ('CID' || LPAD(client_seq.NEXTVAL, 17, '0'))";
         String selectSql = "SELECT 'CID' || LPAD(client_seq.CURRVAL, 17, '0') AS new_client_id FROM DUAL";
 
-        try (Connection conn = DBUtil.getConnection();
+        DBUtil dbu = new DBUtil();
+        try (Connection conn = dbu.getConnection();
              PreparedStatement insertStmt = conn.prepareStatement(insertSql);
              PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
         	
@@ -38,10 +39,11 @@ public class ClientIDDAO {
     }
 
     // 클라이언트 ID 존재 여부 확인
-    public static boolean checkClientIDExists(String clientID) {
+    public boolean checkClientIDExists(String clientID) {
         String sql = "SELECT COUNT(*) AS count FROM client_ids WHERE client_id = ?";
 
-        try (Connection conn = DBUtil.getConnection();
+        DBUtil dbu = new DBUtil();
+        try (Connection conn = dbu.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, clientID);
@@ -60,10 +62,11 @@ public class ClientIDDAO {
     }
 
     // 로그인 시도 기록
-    public static void logLoginAttempt(String clientID) {
+    public void logLoginAttempt(String clientID) {
         String sql = "INSERT INTO client_login_logs (log_id, client_id, login_attempt_time) VALUES (logs_seq.NEXTVAL, ?, SYSTIMESTAMP)";
 
-        try (Connection conn = DBUtil.getConnection();
+        DBUtil dbu = new DBUtil();
+        try (Connection conn = dbu.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, clientID);
@@ -75,13 +78,13 @@ public class ClientIDDAO {
     }
 
     // 30분 동안의 로그인 시도 횟수를 확인
-    public static int getRecentLoginAttempts(String clientID) {
+    public int getRecentLoginAttempts(String clientID) {
         String sql = "SELECT COUNT(*) AS login_attempts " +
                      "FROM client_login_logs " +
                      "WHERE client_id = ? " +
                      "AND login_attempt_time >= (SYSTIMESTAMP - INTERVAL '30' MINUTE)";
-
-        try (Connection conn = DBUtil.getConnection();
+        DBUtil dbu = new DBUtil();
+        try (Connection conn = dbu.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, clientID);
@@ -98,10 +101,10 @@ public class ClientIDDAO {
         return 0;
     }
     // 로그인 시도 횟수를 초기화하는 메서드  //TODO: 나중에 삭제된정보를 다른테이블에 보관하는 기능 추가  옮기고 지우면 될듯?
-    public static void resetLoginAttempts(String cID) {
+    public void resetLoginAttempts(String cID) {
         String sql = "DELETE FROM client_login_logs WHERE client_id = ?";
-
-        try (Connection conn = DBUtil.getConnection();
+        DBUtil dbu = new DBUtil();
+        try (Connection conn = dbu.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, cID);
