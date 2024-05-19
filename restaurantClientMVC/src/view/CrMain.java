@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-import controller.AdminController;
+import controller.AdminEmpController;
+import controller.AdminMenuController;
 import controller.CLientID;
 import controller.CServerDataSender;
 import controller.ClientUtill;
-import controller.CloginManager;
+import controller.CloginController;
 
 public class CrMain {
 	static String logInAs;
@@ -33,8 +34,8 @@ public class CrMain {
 				return;
 			}
 			// 로그인
-			CloginManager cLM = new CloginManager();
-			String logInAs = cLM.login(cs);
+			CloginController cLC = new CloginController();
+			String logInAs = cLC.login(cs);
 			//
 			// 반환값 확인
 			System.out.println(logInAs);
@@ -152,12 +153,10 @@ public class CrMain {
 	
 	// 클라 관리자 메뉴 관리 메뉴
 	private static String manageMenu(Socket cs) {
-		
-		MenuViewer.prBar();
-		
 		System.out.println("메뉴 관리 메뉴로 이동합니다.");
 		CServerDataSender cds = null;
 		String choice;
+		AdminMenuController ac = new AdminMenuController();
 
 		try {
 			cds = new CServerDataSender(cs);
@@ -167,9 +166,7 @@ public class CrMain {
 
 		while (true) {
 			// AdminView
-			//
 			MenuViewer.adminMenuView();
-			//
 			// ------------------------------------------------------------------------
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
@@ -180,21 +177,24 @@ public class CrMain {
 			//
 			switch (choice) {
 			case AdminChoice.LIST:
-				System.out.println("로그아웃");
-				logInAs = null;
-				return MenuChoice.FAIL;
+				System.out.println("선택: 목록");
+				choice = ac.list(cs);
+				if (choice.equals(MenuChoice.ERROR)){
+					return MenuChoice.ERROR;//종료함
+				}
+				break;
 				
 			case AdminChoice.ADD:
-				System.out.println("직원 관리");
-				choice = manageEMP(cs);
+				System.out.println("선택: 추가");
+				choice = ac.add(cs);
 				if (choice.equals(MenuChoice.ERROR)){
 					return MenuChoice.ERROR;//종료함
 				}
 				break;
 				
 			case AdminChoice.DELETE:
-				System.out.println("메뉴 관리");
-				choice = manageMenu(cs);
+				System.out.println("선택: 삭재");
+				choice = ac.delete(cs);
 				if (choice.equals(MenuChoice.ERROR)){
 					return MenuChoice.ERROR;//종료함
 				}
@@ -214,7 +214,7 @@ public class CrMain {
 			}
 		}
 	}
-	
+
 	
 	
 	
@@ -239,7 +239,7 @@ public class CrMain {
 		System.out.println("메뉴 관리 메뉴로 이동합니다.");
 		CServerDataSender cds = null;
 		String choice;
-		AdminController ac = new AdminController();
+		AdminEmpController ac = new AdminEmpController();
 
 		try {
 			cds = new CServerDataSender(cs);

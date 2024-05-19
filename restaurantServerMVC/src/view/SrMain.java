@@ -3,7 +3,8 @@ package view;
 import java.io.IOException;
 import java.net.Socket;
 
-import controller.AdminController;
+import controller.AdminEmpManager;
+import controller.AdminMenuManager;
 import controller.ClientIDManager;
 import controller.SClientHandler;
 import controller.SLoginManager;
@@ -132,76 +133,7 @@ public class SrMain {
 		System.out.println(cID + ": 메뉴 관리 메뉴로 이동합니다.");
 		SClientHandler sch = null;
 		String choice;
-
-		try {
-			sch = new SClientHandler(s);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		while (true) {
-			// ------------------------------------------------------------------------
-			// 수신
-			choice = sch.receive();
-			//
-			System.out.println("socket: "+ s );
-			System.out.println(cID +": "+ choice);
-			//
-			choice = sch.receive();
-			System.out.println("받은값: "+choice);
-
-			switch (choice) {
-			case AdminChoice.LIST:
-				System.out.println("로그아웃");
-				return MenuChoice.FAIL;
-				
-			case AdminChoice.ADD:
-				System.out.println("직원 관리");
-				choice = manageEMP(cID, s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
-				}
-				break;
-				
-			case AdminChoice.DELETE:
-				System.out.println("메뉴 관리");
-				choice = manageMenu(cID,s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
-				}
-				break;
-
-			case AdminChoice.EDIT:
-				System.out.println("오류");
-				return MenuChoice.ERROR;
-			
-			case AdminChoice.BACK:
-				System.out.println("오류");
-				return MenuChoice.ERROR;//종료함
-				
-			default:
-				System.out.println("잘못된값입니다 다시 입력해주세요");
-				break;
-			}
-		}
-	}
-
-
-	
-	
-	
-
-	
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-	
-
-	// 서버 관리자 직원 관리 메뉴
-	private static String manageEMP(String cID, Socket s) {
-		System.out.println(cID + ": 메뉴 관리 메뉴로 이동합니다.");
-		SClientHandler sch = null;
-		String choice;
-		AdminController ac = new AdminController();
+		AdminMenuManager amm = new AdminMenuManager();
 
 		try {
 			sch = new SClientHandler(s);
@@ -227,7 +159,7 @@ public class SrMain {
 				
 			case AdminChoice.ADD:
 				System.out.println("선택: 추가");
-				choice = ac.add(cID, s);
+				choice = amm.add(cID, s);
 				if (choice.equals(MenuChoice.ERROR)){
 					return MenuChoice.ERROR;//종료함
 				}
@@ -235,7 +167,7 @@ public class SrMain {
 				
 			case AdminChoice.DELETE:
 				System.out.println("선택: 삭재");
-				choice = ac.delete(cID, s);
+				choice = amm.delete(cID, s);
 				if (choice.equals(MenuChoice.ERROR)){
 					return MenuChoice.ERROR;//종료함
 				}
@@ -248,6 +180,79 @@ public class SrMain {
 			case AdminChoice.BACK:
 				System.out.println("오류");
 				return MenuChoice.ERROR;//종료함
+				
+			default:
+				System.out.println("잘못된값입니다 다시 입력해주세요");
+				break;
+			}
+		}
+	}
+
+	
+	
+	
+
+	
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	
+
+	// 서버 관리자 직원 관리 메뉴
+	private static String manageEMP(String cID, Socket s) {
+		System.out.println(cID + ": 메뉴 관리 메뉴로 이동합니다.");
+		SClientHandler sch = null;
+		String choice;
+		AdminEmpManager aem = new AdminEmpManager();
+
+		try {
+			sch = new SClientHandler(s);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		while (true) {
+			// ------------------------------------------------------------------------
+			// 수신
+			choice = sch.receive();
+			//
+			System.out.println("socket: "+ s );
+			System.out.println(cID +": "+ choice);
+			//
+			choice = sch.receive();
+			System.out.println("받은값: "+choice);
+
+			switch (choice) {
+			case AdminChoice.LIST:
+				System.out.println("선택: 목록 조회");
+				choice = aem.list(s);
+				if (choice.equals(MenuChoice.ERROR)){
+					return MenuChoice.ERROR;//종료함
+				}
+				break;
+				
+			case AdminChoice.ADD:
+				System.out.println("선택: 추가");
+				choice = aem.add(cID, s);
+				if (choice.equals(MenuChoice.ERROR)){
+					return MenuChoice.ERROR;//종료함
+				}
+				break;
+				
+			case AdminChoice.DELETE:
+				System.out.println("선택: 삭재");
+				choice = aem.delete(cID, s);
+				if (choice.equals(MenuChoice.ERROR)){
+					return MenuChoice.ERROR;//종료함
+				}
+				break;
+
+			case AdminChoice.EDIT:
+				System.out.println("오류");
+				return MenuChoice.ERROR;
+			
+			case AdminChoice.BACK:
+				System.out.println("오류");
+				return MenuChoice.FAIL;//종료X 반복
 				
 			default:
 				System.out.println("잘못된값입니다 다시 입력해주세요");

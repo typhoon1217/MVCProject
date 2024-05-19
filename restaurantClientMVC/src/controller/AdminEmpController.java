@@ -2,8 +2,7 @@ package controller;
 
 import java.net.Socket;
 
-public class AdminController {
-
+public class AdminEmpController {
 	public String add(Socket cs) {
 		// TODO Auto-generated method stub
 		return null;
@@ -13,5 +12,4 @@ public class AdminController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

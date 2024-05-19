@@ -11,7 +11,7 @@ import view.MenuChoice;
 import view.MenuViewer;
 
 //클라이언트 로그인 매니저
-public class CloginManager {
+public class CloginController {
 
     private CValidation validation;
     private CServerDataSender cds;
