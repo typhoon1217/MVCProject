@@ -88,10 +88,7 @@ public class SrMain {
 			choice = sch.receive();
 			//
 			System.out.println("socket: "+ s );
-			System.out.println(cID +": "+ choice);
-			//
-			choice = sch.receive();
-			System.out.println("받은값: "+choice);
+			System.out.println(cID +"|받은값: "+choice);
 
 			switch (choice) {
 			case MenuChoice.LOGOUT:
@@ -213,13 +210,11 @@ public class SrMain {
 		while (true) {
 			// ------------------------------------------------------------------------
 			// 수신
-			choice = sch.receive();
+			choice = sch.receive();//수신---------------------------------------------
 			//
 			System.out.println("socket: "+ s );
-			System.out.println(cID +": "+ choice);
-			//
-			choice = sch.receive();
-			System.out.println("받은값: "+choice);
+			System.out.print(cID +"|");
+			System.out.println("받은값: "+choice);//--
 
 			switch (choice) {
 			case AdminChoice.LIST:

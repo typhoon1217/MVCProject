@@ -249,20 +249,23 @@ public class CrMain {
 
 		while (true) {
 			// AdminView
-			MenuViewer.adminMenuView();
+			MenuViewer.adminEmpMenuView();
 			// ------------------------------------------------------------------------
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
 			cds.send(choice);// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
 			// 
-			System.out.println("전송: "+choice);
+			System.out.println("전송: "+choice);//--
 			MenuViewer.prBar();
 			//
 			switch (choice) {
 			case AdminChoice.LIST:
-				System.out.println("선택: 목록 조회");
-				logInAs = null;
-				return MenuChoice.FAIL;
+				System.out.println("선택: 추가");
+				choice = ac.list(cs);
+				if (choice.equals(MenuChoice.ERROR)){
+					return MenuChoice.ERROR;//종료함
+				}
+				break;
 				
 			case AdminChoice.ADD:
 				System.out.println("선택: 추가");

@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.net.Socket;
 
+import view.AdminChoice;
+
 public class AdminMenuController {
     public String list(Socket cs) {
         try {
@@ -39,7 +41,7 @@ public class AdminMenuController {
             e.printStackTrace();
             return "cds에러";
         }
-        return "LIST";
+        return AdminChoice.LIST;
     }
 
 	public String add(Socket cs) {

@@ -40,8 +40,10 @@ public class AdminEmpManager {
                 employeeList.add(employee);
             }
         } catch (Exception e) {
+        	System.out.println("loadEmployeeList:에러감지");
         	return MenuChoice.ERROR;
         }
+    	System.out.println("loadEmployeeList:에러감지");
 		return AdminChoice.LIST;
     }
 
@@ -50,6 +52,10 @@ public class AdminEmpManager {
         try {
             SClientHandler sch = new SClientHandler(clientSocket);
             String result = loadEmployeeList();
+            if (result.equals(MenuChoice.ERROR)){
+            	System.out.println("list:에러감지");
+            	return MenuChoice.ERROR;
+            }
             // 직원 목록 전송
             for (EmployeeVo employee : employeeList) {
                 // 비밀번호를 제외한 직원 정보 전송
@@ -57,9 +63,9 @@ public class AdminEmpManager {
                 sch.send(employee.getEmpName());
                 sch.send(employee.getEmpManager());
                 sch.send(employee.getEmpDepartment());
-                sch.send(String.valueOf(employee.getEmpPhoneNumber()));
+                sch.send(employee.getEmpPhoneNumber());
                 sch.send(employee.getEmpEmail());
-                sch.send(String.valueOf(employee.getEmpSalary()));
+                sch.send(employee.getEmpSalary());
             }
             // 데이터 전송 종료를 나타내는 문자열 전송
             sch.send("STOP");
@@ -67,6 +73,7 @@ public class AdminEmpManager {
             System.out.println("Error sending employee list to client: " + e.getMessage());
             return MenuChoice.ERROR;
         }
+        System.out.println("back to list");
 		return AdminChoice.LIST;
     }
 

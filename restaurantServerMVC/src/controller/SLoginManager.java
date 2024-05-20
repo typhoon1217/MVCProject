@@ -27,8 +27,9 @@ public class SLoginManager {
 
         // 최근 30분 동안의 로그인 시도 횟수를 확인
         int recentAttempts = ciDAO.getRecentLoginAttempts(cID);
-
+        
         while (recentAttempts < maxAttempts) {
+        	System.out.println(cID+": 로그인 정보 기다리는중.........");
             String id = sch.receive();
             String pw = sch.receive();
             System.out.println("ID: " + id + " 받음");

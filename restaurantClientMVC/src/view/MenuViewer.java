@@ -29,7 +29,7 @@ public class MenuViewer {
 	}
 
 	// 직원관리 메뉴
-	public static void empMenuView() {
+	public static void adminEmpMenuView() {
 		System.out.println();
 		prBar();
 		System.out.println("관리자 클라이언트");
@@ -45,7 +45,7 @@ public class MenuViewer {
 	}
 
 	// 메뉴판 관리 메뉴
-	public static void menuMenuView() {
+	public static void adminMenuMenuView() {
 		System.out.println();
 		prBar();
 		System.out.println("관리자 클라이언트");
