@@ -89,7 +89,7 @@ public class EmployeeVo {
         this.empSalary = empSalary;
     }
 
-    // 타입 변환용 getters setters 클라이언트와 서버와 소통시 전부 String임 
+    // 타입 변환용 SETTERS;
     public long getEmpPhoneNumberAsInt() {
         return Integer.parseInt(empPhoneNumber);
     }

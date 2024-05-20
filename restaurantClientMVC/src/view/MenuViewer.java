@@ -37,8 +37,8 @@ public class MenuViewer {
 		prBar();
 		System.out.println("1. 직원 정보 목록");
 		System.out.println("2. 직원 정보 입력");
-		System.out.println("3. 직원 정보 수정");
-		System.out.println("4. 직원 정보 삭제");
+		System.out.println("3. 직원 정보 삭제");
+		System.out.println("4. 직원 정보 수정");
 		System.out.println("5. 관리자 메뉴");
 		prBar();
 		System.out.print("번호 선택 >> ");
@@ -53,8 +53,8 @@ public class MenuViewer {
 		prBar();
 		System.out.println("1. 메뉴 정보 목록");
 		System.out.println("2. 메뉴 정보 입력");
-		System.out.println("3. 메뉴 정보 수정");
-		System.out.println("4. 메뉴 정보 삭제");
+		System.out.println("3. 메뉴 정보 삭제");
+		System.out.println("4. 메뉴 정보 수정");
 		System.out.println("5. 관리자 메뉴");
 		prBar();
 		System.out.print("번호 선택 >> ");
@@ -122,4 +122,50 @@ public class MenuViewer {
 		prBar();
 		System.out.print("번호 선택 >> ");
 	}
+	
+	public static boolean yes1orno2() {
+		String input;
+		while(true) {
+			System.out.println();
+	        System.out.println("1:예  2:아니요");
+	        System.out.print(">>>");
+	        input=CrMain.sc.nextLine();
+			prBar();
+	        switch(input) {
+	        case "1":
+	        return true;
+	        case "2":
+	        return false;
+	        default: System.out.println("다시 입력하세요 (1) or (2)만 가능합니다.");
+	        break;
+	        }     
+		}
+	}
+
+	public static String departmentChoice() {
+		String input;
+		while(true) {
+			System.out.println();
+	        System.out.println("1: "+MenuChoice.ADMIN+ "  2: "+MenuChoice.SERVE+
+	        		"\t  3: "+ MenuChoice.CHEF+"  4: "+MenuChoice.ACCOUNT+" 5:  exit");
+	        System.out.print(">>>");
+	        input=CrMain.sc.nextLine();
+			MenuViewer.prBar();
+	        switch(input) {
+	        case "1":
+	        return MenuChoice.ADMIN;
+	        case "2":
+	        return MenuChoice.SERVE;
+	        case "3":
+		    return MenuChoice.CHEF;
+	        case "4":
+		    return MenuChoice.ACCOUNT;
+	        case "5":
+		    return MenuChoice.FAIL;//반복용
+		    default:
+		    	System.out.println("올바른 값을 입력해 주세요");
+	        break;
+	        }     
+		}
+	}	
 }

@@ -6,6 +6,8 @@ import java.net.Socket;
 import view.AdminChoice;
 
 public class AdminMenuController {
+	
+	 //클라이언트
     public String list(Socket cs) {
         try {
             CServerDataSender cds = new CServerDataSender(cs);
