@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import view.AdminChoice;
+import view.MenuChoice;
 
 public class AdminMenuController {
 	
@@ -41,7 +42,7 @@ public class AdminMenuController {
         } catch (IOException e) {
             System.out.print("cds에러: ");
             e.printStackTrace();
-            return "cds에러";
+            return MenuChoice.ERROR;
         }
         return AdminChoice.LIST;
     }

@@ -30,15 +30,17 @@ public class DBUtil {
 			System.out.println("데이터베이스 접속 성공");
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			
 			e.printStackTrace();
 			System.out.println("데이터베이스 드라이버 로드 실패");
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
 			System.out.println("데이터베이스 연결 실패");
 		}

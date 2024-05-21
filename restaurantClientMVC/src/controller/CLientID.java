@@ -30,7 +30,8 @@ public class CLientID {
                 clientID = Files.readString(path).trim();
             } catch (IOException e) {
                 e.printStackTrace();
-                return "파일 읽기 오류";
+                System.out.println("파일읽기 에러");
+                return MenuChoice.ERROR;
             }
         } else {
             clientID = "empty";  // 파일이 없을 경우 "empty"로 설정
@@ -46,7 +47,7 @@ public class CLientID {
 
         System.out.println("clientID: " + clientID);
         System.out.println("result: " + result);
-
+        
         // 파일에 새 클라이언트 ID 저장 (필요시)
         switch (result) {
             case "new":
@@ -56,7 +57,8 @@ public class CLientID {
                     return clientID;
                 } catch (IOException e) {
                     e.printStackTrace();
-                    return "clientID 생성오류";
+                    System.out.println("clientID 생성오류");
+                    return MenuChoice.ERROR;
                 }
 
             case MenuChoice.FAIL:

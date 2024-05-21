@@ -46,6 +46,7 @@ CREATE TABLE rtable (
     table_no                NUMBER NOT NULL  -- 숫자 루트로 좌석 테이블 그릴 예정
 );
 
+
 -- 테이블 당 주문들 관리 테이블
 CREATE TABLE aOrder (
     aorder_id               VARCHAR2(10)    NOT NULL, -- PK
@@ -53,7 +54,7 @@ CREATE TABLE aOrder (
     customer_id             VARCHAR2(20),   -- FK Customers, null 가능
     aorder_datetime         TIMESTAMP       NOT NULL,
     atotal_amount           NUMBER          NOT NULL,
-    aorder_status           VARCHAR2(20)    NOT NULL  -- list: cooking, served, paid
+    aorder_status           VARCHAR2(10)    NOT NULL  -- list: cooking, served, paid
 );
 
 -- 주문 상세 관리 테이블
@@ -165,7 +166,7 @@ BEFORE INSERT ON Order_Details
 FOR EACH ROW
 BEGIN
     -- 주문 상세 ID 생성
-    :NEW.order_detail_id := 'ODI' || LPAD(Order_Details_seq.NEXTVAL, 'FM0000000');
+    :NEW.order_detail_id := 'ODI' || TO_CHAR(Order_Details_seq.NEXTVAL, 'FM000000');
 END;
 /
 
@@ -196,6 +197,20 @@ BEGIN
 END;
 /
 
+
+--테이블 이동 프로시저
+CREATE OR REPLACE PROCEDURE move_table (
+    p_old_table_no IN NUMBER,
+    p_new_table_no IN NUMBER
+) AS
+BEGIN
+    UPDATE aorder SET table_no = p_new_table_no WHERE table_no = p_old_table_no;
+    DELETE FROM rtable WHERE table_no = p_old_table_no;
+    INSERT INTO rtable (table_no) VALUES (p_new_table_no);
+END;
+/
+
+
 -- Recipe 테이블의 시퀀스 생성 트리거
 CREATE OR REPLACE TRIGGER generate_recipe_content_id
 BEFORE INSERT ON Recipe
@@ -204,3 +219,7 @@ BEGIN
     :NEW.recipe_content_id := 'REC' || TO_CHAR(Recipe_seq.NEXTVAL, 'FM0000000'); -- 예: REC1, REC2, ...
 END;
 /
+
+
+--
+

@@ -20,14 +20,36 @@ VALUES ('chef123', 'Qwer!234', '세중우', '신중우', 'chef', 1012323411, 10000);
 INSERT INTO Employee (emp_id, emp_password, emp_name, emp_manager, emp_department, emp_phone_number, emp_salary)
 VALUES ('acc123', 'Qwer!234', '어중우', '신중우', 'account', 1012321241, 10000);
 
-INSERT INTO rtable (table_no)
-VALUES (1);
+INSERT INTO rtable
+VALUES (1,true);
 
 INSERT INTO rtable (table_no)
-VALUES (2);
+VALUES (2,true);
 
 INSERT INTO rtable (table_no)
-VALUES (3);
+VALUES (3,true);
+
+INSERT INTO rtable (table_no)
+VALUES (4,false);
+INSERT INTO rtable (table_no)
+VALUES (5,false);
+INSERT INTO rtable (table_no)
+VALUES (6,false);
+INSERT INTO rtable (table_no)
+VALUES (7,false);
+INSERT INTO rtable (table_no)
+VALUES (8,false);
+INSERT INTO rtable (table_no)
+VALUES (9,false);
+INSERT INTO rtable (table_no)
+VALUES (10,false);
+INSERT INTO rtable (table_no)
+VALUES (11,false);
+INSERT INTO rtable (table_no)
+VALUES (12,false);
+INSERT INTO rtable (table_no)
+VALUES (13,false);
+
 
 -- 주문 예제 1
 INSERT INTO aOrder (table_no, customer_id, aorder_datetime, atotal_amount, aorder_status)

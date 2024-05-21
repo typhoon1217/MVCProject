@@ -51,9 +51,10 @@ public class SLoginManager {
             if (!dep.equals(MenuChoice.FAIL)) {
             	// 로그인 성공 시 로그인 시도 횟수 초기화
             	ciDAO.resetLoginAttempts(cID);
-                msg = "PASS";
+                msg = MenuChoice.PASS;
                 sch.send(dep);
                 sch.send(msg);
+                System.out.println(dep+"---------------체크");
                 return dep;
             } else {
                 if (recentAttempts < maxAttempts) {

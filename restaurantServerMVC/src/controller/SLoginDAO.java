@@ -34,7 +34,7 @@ public class SLoginDAO {
                 department = rs.getString("EMP_DEPARTMENT");
                 System.out.println(department);
             } else {
-                //직원 없음 fail 유지
+                //직원 없음 fail 유지 개인정보 불일치 출력 
                 System.out.println("Invalid credentials. Please try again.");
             }
         } catch (SQLException e) {

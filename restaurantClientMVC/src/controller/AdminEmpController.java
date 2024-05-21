@@ -83,7 +83,7 @@ public class AdminEmpController {
 
 			while (true) {
 				MenuViewer.prBar();
-				System.out.print("직원 PW입력: ");
+				System.out.print(" 직원 PW입력: ");
 				empPassword = CrMain.sc.nextLine();// --------입력2
 				if (validation.checkPW(empPassword)) {
 					System.out.println("다시입력할까요?");
@@ -155,8 +155,19 @@ public class AdminEmpController {
 						break;
 				} // val 실패시 다시입력
 			} // empManager);
-
-			System.out.print("입력받은 정보를 전송할까요?? 아니요:처음부터 다시입력");
+			
+            MenuViewer.prBar2("입력받은 값");
+            System.out.printf("%-10s : %s%n", "직원아이디", empId);
+            System.out.printf("%-10s : %s%n", "직원비밀번호", empPassword);
+            System.out.printf("%-10s : %s%n", "이름", empName);
+            System.out.printf("%-10s : %s%n", "직속상사", empManager);
+            System.out.printf("%-10s : %s%n", "소속부서", empDepartment);
+            System.out.printf("%-10s : %s%n", "전화번호", empPhoneNumber);
+            System.out.printf("%-10s : %s%n", "이메일", empEmail);
+            System.out.printf("%-10s : %s%n", "직원월급", empSalary);
+            MenuViewer.prBar();
+            
+			System.out.println("입력받은 정보를 전송할까요?? 아니요:처음부터 다시입력");
 			flag = MenuViewer.yes1orno2();
 		} // end of flag while
 		try {
@@ -309,8 +320,18 @@ public class AdminEmpController {
 	                    if (!MenuViewer.yes1orno2()) break;
 	                }
 	            }
-
-	            System.out.print("입력받은 정보를 전송할까요?? 아니요:처음부터 다시입력");
+                MenuViewer.prBar2("입력받은 값");
+                System.out.printf("%-10s : %s%n", "직원아이디", empId);
+                System.out.printf("%-10s : %s%n", "직원비밀번호", empPassword);
+                System.out.printf("%-10s : %s%n", "이름", empName);
+                System.out.printf("%-10s : %s%n", "직속상사", empManager);
+                System.out.printf("%-10s : %s%n", "소속부서", empDepartment);
+                System.out.printf("%-10s : %s%n", "전화번호", empPhoneNumber);
+                System.out.printf("%-10s : %s%n", "이메일", empEmail);
+                System.out.printf("%-10s : %s%n", "직원월급", empSalary);
+                
+                MenuViewer.prBar();
+	            System.out.println("입력받은 정보를 전송할까요?? 아니요:처음부터 다시입력");
 	            flag = MenuViewer.yes1orno2();
 	        }
 

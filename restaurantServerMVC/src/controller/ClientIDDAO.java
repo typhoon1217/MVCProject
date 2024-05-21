@@ -34,7 +34,7 @@ public class ClientIDDAO {
             return newCID;
         } catch (SQLException e) {
             e.printStackTrace();
-            return MenuChoice.FAIL;
+            return MenuChoice.ERROR;
         }
     }
 
@@ -57,12 +57,13 @@ public class ClientIDDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
         return false;
     }
 
     // 로그인 시도 기록
-    public void logLoginAttempt(String clientID) {
+    public String logLoginAttempt(String clientID) {
         String sql = "INSERT INTO client_login_logs (log_id, client_id, login_attempt_time) VALUES (logs_seq.NEXTVAL, ?, SYSTIMESTAMP)";
 
         DBUtil dbu = new DBUtil();
@@ -72,8 +73,10 @@ public class ClientIDDAO {
             pstmt.setString(1, clientID);
             pstmt.executeUpdate();
 
+    		return MenuChoice.PASS;
         } catch (SQLException e) {
             e.printStackTrace();
+            return MenuChoice.ERROR;
         }
     }
 
@@ -94,14 +97,13 @@ public class ClientIDDAO {
                     return rs.getInt("login_attempts");
                 }
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            return 100;
         }
-        return 0;
+        return 100;
     }
     // 로그인 시도 횟수를 초기화하는 메서드  //TODO: 나중에 삭제된정보를 다른테이블에 보관하는 기능 추가  옮기고 지우면 될듯?
-    public void resetLoginAttempts(String cID) {
+    public String resetLoginAttempts(String cID) {
         String sql = "DELETE FROM client_login_logs WHERE client_id = ?";
         DBUtil dbu = new DBUtil();
         try (Connection conn = dbu.getConnection();
@@ -110,9 +112,12 @@ public class ClientIDDAO {
             pstmt.setString(1, cID);
             pstmt.executeUpdate();
 
+    		return MenuChoice.PASS;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+		return MenuChoice.FAIL;
     }
 }
 
