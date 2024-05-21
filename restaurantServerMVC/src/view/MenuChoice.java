@@ -12,6 +12,6 @@ public interface MenuChoice {
 	public static final String ERROR = "/ERROR?END/";
 	
 	//로그아웃용
-	public static final String LOGOUT = "lOut";
+	public static final String LOGOUT = "0";
 }
 

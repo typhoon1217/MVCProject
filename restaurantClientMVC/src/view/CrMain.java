@@ -11,7 +11,6 @@ import controller.CServerDataSender;
 import controller.ClientUtill;
 import controller.CloginController;
 
-
 public class CrMain {
 	static String logInAs;
 	public static Scanner sc = new Scanner(System.in);
@@ -20,13 +19,14 @@ public class CrMain {
 	public static void main(String[] args) {
 		CMainMenu();
 	}
-	//접속 5초간격 재시도 보여주기
-	//클라이언트 id
-	//-생성
-	//-조회 5회 
-	//클라이언트 정규식 
-	//-cid 5회 사용 
-	//부서 반환 
+
+	// 접속 5초간격 재시도 보여주기
+	// 클라이언트 id
+	// -생성
+	// -조회 5회
+	// 클라이언트 정규식
+	// -cid 5회 사용
+	// 부서 반환
 	private static void CMainMenu() {
 		boolean isLogin = true;
 		isLogin = exit();
@@ -66,12 +66,12 @@ public class CrMain {
 				break;
 			case MenuChoice.FAIL: // 아직 반복-------------------------------중요------------
 				System.out.println("재접속을 시도합니다.");
-				break;//반복
+				break;// 반복
 			default: // 에러등 프로그램을 종료시키고 싶을때
 				isLogin = false;
 				System.out.println("오류가 발생했습니다.");
 				System.out.println("프로그램을 종료합니다.");
-				return;//종료
+				return;// 종료
 			}
 			if (isLogin) {
 				isLogin = exit();
@@ -79,7 +79,7 @@ public class CrMain {
 		} // end of while
 			// 리턴 종료
 	}
-	
+
 	// 클라이언트 관리자 메뉴
 	private static String adminMenu(Socket cs) {
 		MenuViewer.prBar();
@@ -94,7 +94,7 @@ public class CrMain {
 		}
 
 		while (true) {
-		
+
 			// AdminView
 			MenuViewer.prBar();
 			MenuViewer.adminMenuView();
@@ -102,45 +102,44 @@ public class CrMain {
 			// ------------------------------------------------------------------------
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
-			System.out.println("전송: "+choice);
-			
+			System.out.println("전송: " + choice);
+
 			MenuViewer.prBar();
-			
+
 			cds.send(choice);// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
 			switch (choice) {
 			case MenuChoice.LOGOUT:
 				System.out.println("로그아웃");
 				logInAs = null;
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
 				choice = manageEMP(cs);
 				break;
-				//----------------북마크------------
-				//----------------북마크------------
+			// ----------------북마크------------
+			// ----------------북마크------------
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
 				choice = manageMenu(cs);
 				break;
-				
+
 			case MenuChoice.FAIL:
 				System.out.println("<BACK>");
 				break;
-				
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.println("잘못된값입니다 다시 입력해주세요");
 				break;
 			}
 		}
 	}
-	
-	
-	//클라 관리자 직원 관리 메뉴
+
+	// 클라 관리자 직원 관리 메뉴111
 	private static String manageEMP(Socket cs) {
 		System.out.println("메뉴 관리 메뉴로 이동합니다.");
 		MenuViewer.prBar();
@@ -161,149 +160,140 @@ public class CrMain {
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
 			cds.send(choice);// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
-			// 
-			System.out.println("전송: "+choice);//--
+			//
+			System.out.println("전송: " + choice);// --
 			MenuViewer.prBar();
 			//
 			switch (choice) {
 			case AdminChoice.LIST:
 				System.out.println("선택: 직원 목록 조회");
 				choice = ac.list(cs);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-				
+
 			case AdminChoice.ADD:
 				System.out.println("선택: 직원 추가");
-				
+
 				choice = ac.add(cs);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-				
 
 			case AdminChoice.EDIT:
+				
+				choice = ac.list(cs);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				
 				System.out.println("선택: 직원 정보 수정");
 				choice = ac.edit(cs);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-				
+
 			case AdminChoice.DELETE:
 				System.out.println("선택: 직원 삭재");
 				//
-				//--리스트
+				// --리스트
 				choice = ac.list(cs);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				//
-				//--삭제
+				// --삭제
 				choice = ac.delete(cs);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-			
+
 			case AdminChoice.BACK:
 				System.out.println("뒤로|관리자 메뉴로");
-				return MenuChoice.FAIL;//종료X 외부 반복
-				
+				return MenuChoice.FAIL;// 종료X 외부 반복
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
-				return MenuChoice.ERROR;//오류 종료
-				
+				return MenuChoice.ERROR;// 오류 종료
+
 			default:
 				System.out.println("잘못된값입니다 다시 입력해주세요");
-				break;//내부반복
+				break;// 내부반복
 			}
 		}
 	}
 
-	
 	// 클라 관리자 메뉴 관리 메뉴
-		private static String manageMenu(Socket cs) {
-			System.out.println("메뉴 관리 메뉴로 이동합니다.");
-			CServerDataSender cds = null;
-			String choice;
-			AdminMenuController ac = new AdminMenuController();
+	private static String manageMenu(Socket cs) {
+		System.out.println("메뉴 관리 메뉴로 이동합니다.");
+		CServerDataSender cds = null;
+		String choice;
+		AdminMenuController ac = new AdminMenuController();
 
-			try {
-				cds = new CServerDataSender(cs);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			while (true) {
-				// AdminView
-				MenuViewer.adminMenuView();
-				// ------------------------------------------------------------------------
-				// 입력후 전송
-				choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
-				cds.send(choice);//전송-------------------------------------------------
-				// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
-				// 
-				System.out.println("전송: "+choice);
-				MenuViewer.prBar();
-				//
-				switch (choice) {
-				case AdminChoice.LIST:
-					System.out.println("선택: 목록");
-					choice = ac.list(cs);
-					if (choice.equals(MenuChoice.ERROR)){
-						return MenuChoice.ERROR;//종료함
-					}
-					break;
-					
-				case AdminChoice.ADD:
-					System.out.println("선택: 추가");
-					choice = ac.add(cs);
-					if (choice.equals(MenuChoice.ERROR)){
-						return MenuChoice.ERROR;//종료함
-					}
-					break;
-					
-				case AdminChoice.DELETE:
-					System.out.println("선택: 삭재");
-					choice = ac.delete(cs);
-					if (choice.equals(MenuChoice.ERROR)){
-						return MenuChoice.ERROR;//종료함
-					}
-					break;
-
-				case AdminChoice.EDIT:
-					System.out.println("오류");
-					return MenuChoice.ERROR;
-				
-				case AdminChoice.BACK:
-					System.out.println("오류");
-					return MenuChoice.ERROR;//종료함
-					
-				default:
-					System.out.println("잘못된값입니다 다시 입력해주세요");
-					break;
-				}
-			}
+		try {
+			cds = new CServerDataSender(cs);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-	
-	
+		while (true) {
+			// AdminView
+			MenuViewer.adminMenuView();
+			// ------------------------------------------------------------------------
+			// 입력후 전송
+			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
+			cds.send(choice);// 전송-------------------------------------------------
+			// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
+			//
+			System.out.println("전송: " + choice);
+			MenuViewer.prBar();
+			//
+			switch (choice) {
+			case AdminChoice.LIST:
+				System.out.println("선택: 목록");
+				choice = ac.list(cs);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				break;
+
+			case AdminChoice.ADD:
+				System.out.println("선택: 추가");
+				choice = ac.add(cs);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				break;
+
+			case AdminChoice.DELETE:
+				System.out.println("선택: 삭재");
+				choice = ac.delete(cs);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				break;
+
+			case AdminChoice.EDIT:
+				System.out.println("오류");
+				return MenuChoice.ERROR;
+
+			case AdminChoice.BACK:
+				System.out.println("오류");
+				return MenuChoice.ERROR;// 종료함
+
+			default:
+				System.out.println("잘못된값입니다 다시 입력해주세요");
+				break;
+			}
+		}
+	}
+
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 	// 클라이언트 서버 메뉴
 	private static String serverMenu(Socket cs) {
 		System.out.println("서버 메뉴로 이동합니다.");
@@ -324,8 +314,8 @@ public class CrMain {
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
 			cds.send(choice);// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
-			// 
-			System.out.println("전송: "+choice);
+			//
+			System.out.println("전송: " + choice);
 			MenuViewer.prBar();
 			//
 			switch (choice) {
@@ -333,30 +323,30 @@ public class CrMain {
 				System.out.println("로그아웃");
 				logInAs = null;
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
 				choice = manageEMP(cs);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
 				choice = manageMenu(cs);
 				break;
-				
-			//case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
-				
+
+			// case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.println("잘못된값입니다 다시 입력해주세요");
 				break;
 			}
 		}
 	}
-	
+
 	// 클라이언트 회계 메뉴
 	private static String accountMenu(Socket cs) {
 		System.out.println("회계 메뉴로 이동합니다.");
@@ -377,8 +367,8 @@ public class CrMain {
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
 			cds.send(choice);// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
-			// 
-			System.out.println("전송: "+choice);
+			//
+			System.out.println("전송: " + choice);
 			MenuViewer.prBar();
 			//
 			switch (choice) {
@@ -386,23 +376,23 @@ public class CrMain {
 				System.out.println("로그아웃");
 				logInAs = null;
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
 				choice = manageEMP(cs);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
 				choice = manageMenu(cs);
 				break;
-				
-			//case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
-				
+
+			// case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.println("잘못된값입니다 다시 입력해주세요");
 				break;
@@ -430,8 +420,8 @@ public class CrMain {
 			// 입력후 전송
 			choice = sc.nextLine(); // 정규화 필요 fail error값 직접 입력 막아야됨
 			cds.send(choice);// TODO:마무리 옵션 작업> 잘못된값일땐 안보내는게 성능에는 더좋을듯 하지만 복잡해짐
-			// 
-			System.out.println("전송: "+choice);
+			//
+			System.out.println("전송: " + choice);
 			MenuViewer.prBar();
 			//
 			switch (choice) {
@@ -439,23 +429,23 @@ public class CrMain {
 				System.out.println("로그아웃");
 				logInAs = null;
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
 				choice = manageEMP(cs);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
 				choice = manageMenu(cs);
 				break;
-				
-			//case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
-				
+
+			// case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.println("잘못된값입니다 다시 입력해주세요");
 				break;

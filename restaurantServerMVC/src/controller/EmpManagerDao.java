@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class EmpManagerDao {
     public EmpManagerDao() {
         this.employeeList = new ArrayList<>();
     }
-
+    
     public String loadEmployeeList(Socket cs) {
         DBUtil dbu = new DBUtil();
         try (Connection con = dbu.getConnection()) {
@@ -38,13 +39,13 @@ public class EmpManagerDao {
                 employee.setEmpSalaryFromInt(rs.getInt("emp_salary"));
                 employeeList.add(employee);
 
-                sch.send(employee.getEmpId());
-                sch.send(employee.getEmpName());
-                sch.send(employee.getEmpManager());
-                sch.send(employee.getEmpDepartment());
-                sch.send(employee.getEmpPhoneNumber());
-                sch.send(employee.getEmpEmail());
-                sch.send(employee.getEmpSalary());
+                sch.send(employee.getEmpId());//--1n
+                sch.send(employee.getEmpName());//-2n
+                sch.send(employee.getEmpManager());//--3n
+                sch.send(employee.getEmpDepartment());//--4n
+                sch.send(employee.getEmpPhoneNumber());//--5n
+                sch.send(employee.getEmpEmail());//---6n
+                sch.send(employee.getEmpSalary());//---7n
             }
             sch.send("STOP");
 
@@ -61,7 +62,7 @@ public class EmpManagerDao {
         DBUtil dbu = new DBUtil();
         try (Connection con = dbu.getConnection()) {
             SClientHandler sch = new SClientHandler(cs);
-//TODO 합쳐도 되나? ---------------------------------
+// ---------------------------------
             //String empId = sch.receive();//-------1
            // String empPw = sch.receive();//-------2
            // String empName = sch.receive();//-------3
@@ -83,30 +84,40 @@ public class EmpManagerDao {
            // stmt.setString(7, empEmail);
            // stmt.setLong(8, Long.parseLong(empSalary));
             
-             stmt.setString(1, sch.receive());
-             stmt.setString(2,  sch.receive());
-             stmt.setString(3,  sch.receive());
-             stmt.setString(4,  sch.receive());
-             stmt.setString(5,  sch.receive());
-             stmt.setLong(6, Long.parseLong(sch.receive()));
-             stmt.setString(7,  sch.receive());
-             stmt.setLong(8, Long.parseLong(sch.receive()));
+             stmt.setString(1, sch.receive());//-----------1
+             stmt.setString(2,  sch.receive());//----------2
+             stmt.setString(3,  sch.receive());//-------------3
+             stmt.setString(4,  sch.receive());//---------------4
+             stmt.setString(5,  sch.receive());//----------------5
+             stmt.setLong(6, Long.parseLong(sch.receive()));//------6
+             stmt.setString(7,  sch.receive());//----------------------7
+             stmt.setLong(8, Long.parseLong(sch.receive()));//-----8
             
 //--------------------------------------------
             stmt.executeUpdate();
             
             
+            // 성공 메시지 전송
+            sch.send("성공");
+            return AdminChoice.ADD;
 
-			System.out.println("추가 작업 종료");
         } catch (Exception e) {
             System.out.println("addEmployee:에러감지");
             e.printStackTrace();
             
+            // 실패 메시지 전송
+            SClientHandler sch;
+			try {
+				sch = new SClientHandler(cs);
+	            sch.send("실패");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				System.out.println("IO에러 종료ERR 리턴");
+				return MenuChoice.ERROR;
+			}
+            
             return MenuChoice.ERROR;
         }
-        
-        System.out.println("addEmployee:직원 추가 성공");
-        return AdminChoice.ADD;
     }
 
     public String deleteEmployee(Socket cs) {
@@ -114,7 +125,7 @@ public class EmpManagerDao {
         try (Connection con = dbu.getConnection()) {
             SClientHandler sch = new SClientHandler(cs);
 
-            String empId = sch.receive();
+            String empId = sch.receive(); //삭제할 아이디 받음1<
 
             String query = "DELETE FROM Employee WHERE emp_id = ?";
             System.out.println(cs+" |DB|SQL: "+query);
@@ -122,9 +133,17 @@ public class EmpManagerDao {
 
             stmt.setString(1, empId);
 
-            stmt.executeUpdate();
-            
-            //sch.send("pass");//TODO: add delete edit 에 성공여부 소통하기 
+            int rowsAffected = stmt.executeUpdate(); // 성공 실패 감지를 위해 
+
+            if (rowsAffected > 0) {
+                // 성공 메시지 전송
+                sch.send("성공");// 성공/실패 전송2>
+                System.out.println("전송:성공");
+            } else {
+                // 실패 메시지 전송
+                sch.send("실패");// 성공/실패 전송2>
+                System.out.println("전송:실패");
+            }
 
         } catch (Exception e) {
             System.out.println("deleteEmployee:에러감지");
@@ -135,10 +154,52 @@ public class EmpManagerDao {
         System.out.println("deleteEmployee:직원 삭제 성공");
         return AdminChoice.DELETE;
     }
+    public String editEmployee(Socket cs) {
+        DBUtil dbu = new DBUtil();
+        try (Connection con = dbu.getConnection()) {
+            SClientHandler sch = new SClientHandler(cs);
 
-	public String editEmployee(Socket s) {
-		
-		return null;
-	}
+            String query = "UPDATE Employee SET emp_password = ?, emp_name = ?, emp_manager = ?, emp_department = ?, emp_phone_number = ?, emp_email = ?, emp_salary = ? WHERE emp_id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            stmt.setString(8, sch.receive()); // empId
+            stmt.setString(1, sch.receive()); // empPassword
+            stmt.setString(2, sch.receive()); // empName
+            stmt.setString(3, sch.receive()); // empManager
+            stmt.setString(4, sch.receive()); // empDepartment
+            stmt.setLong(5, Long.parseLong(sch.receive())); // empPhoneNumber
+            stmt.setString(6, sch.receive()); // empEmail
+            stmt.setLong(7, Long.parseLong(sch.receive())); // empSalary
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // 성공 메시지 전송
+                sch.send("성공");
+            } else {
+                // 실패 메시지 전송
+                sch.send("실패");
+            }
+
+            return AdminChoice.EDIT;
+
+        } catch (Exception e) {
+            System.out.println("editEmployee:에러감지");
+            e.printStackTrace();
+            
+            // 실패 메시지 전송
+            SClientHandler sch;
+			try {
+				sch = new SClientHandler(cs);
+	            sch.send("실패");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				System.out.println("IO에러 종료ERR 리턴");
+				return MenuChoice.ERROR;
+			}
+            return MenuChoice.ERROR;
+        }
+    }
+
 }
 

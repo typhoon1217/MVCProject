@@ -88,43 +88,39 @@ public class SrMain {
 			// 수신
 			choice = sch.receive();
 			//
-			System.out.println("socket: "+ s );
-			System.out.println(cID +"|받은값: "+choice);
+			System.out.println("socket: " + s);
+			System.out.println(cID + "|받은값: " + choice);
 
 			switch (choice) {
 			case MenuChoice.LOGOUT:
-				System.out.println(cID+": 로그아웃");
+				System.out.println(cID + ": 로그아웃");
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
-				System.out.println(cID+": 직원 관리");
-				choice = manageEMP(cID,s);
+				System.out.println(cID + ": 직원 관리");
+				choice = manageEMP(cID, s);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
-				System.out.println(cID+": 메뉴 관리");
-				choice = manageMenu(cID,s);
+				System.out.println(cID + ": 메뉴 관리");
+				choice = manageMenu(cID, s);
 				break;
-				
+
 			case MenuChoice.FAIL:
-				System.out.println(cID+": <BACK>");
+				System.out.println(cID + ": <BACK>");
 				break;
-				
+
 			case MenuChoice.ERROR:
-				System.out.println(cID+": 오류");
+				System.out.println(cID + ": 오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
-				System.out.print(cID+": 재입력 요청:");
-				
+				System.out.print(cID + ": 재입력 요청:");
+
 				break;
 			}
 		}
 	}
-
-	
-	
-	
 
 	// 서버 관리자 직원 관리 메뉴
 	private static String manageEMP(String cID, Socket s) {
@@ -143,74 +139,78 @@ public class SrMain {
 		while (true) {
 			// ------------------------------------------------------------------------
 			// 수신
-			choice = sch.receive();//수신---------------------------------------------
+			choice = sch.receive();// 수신---------------------------------------------
 			//
-			System.out.println("socket: "+ s );
-			System.out.print(cID +"|");
-			System.out.println("받은값: "+choice);//--
+			System.out.println("socket: " + s);
+			System.out.print(cID + "|");
+			System.out.println("받은값: " + choice);// --
 
 			switch (choice) {
 			case AdminChoice.LIST:
-				System.out.println(cID +"|선택: 직원 목록 조회");
+				System.out.println(cID + "|선택: 직원 목록 조회");
 				choice = aem.list(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
-				}
-				break;
-				
-			case AdminChoice.ADD:
-				System.out.println(cID +"|선택: 직원 추가");
-				choice = aem.add(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
-				}
-				break;
-				
-			case AdminChoice.EDIT:
-				System.out.println(cID +"|선택: 직원 삭재");
-				choice = aem.edit(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
-				}
-				break;
-				
-			case AdminChoice.DELETE:
-				System.out.println(cID +"|선택: 직원 삭재");
-				//
-				//--리스트
-				choice = aem.list(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
-				}
-				//
-				//--삭제
-				choice = aem.delete(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
 
-			
-			case AdminChoice.BACK:
-				System.out.println(cID +"|관리자 메뉴로");
-				return MenuChoice.FAIL;//종료X  외부 반복
+			case AdminChoice.ADD:
+				System.out.println(cID + "|선택: 직원 추가");
+				choice = aem.add(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				break;
+
+			case AdminChoice.EDIT:
 				
+				System.out.println(cID + "|선택: 직원 수정");
+				
+				choice = aem.list(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				
+				choice = aem.edit(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				break;
+
+			case AdminChoice.DELETE:
+				System.out.println(cID + "|선택: 직원 삭제");
+				//
+				// --리스트
+				choice = aem.list(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				//
+				// --삭제
+				choice = aem.delete(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
+				}
+				break;
+
+			case AdminChoice.BACK:
+				System.out.println(cID + "|관리자 메뉴로");
+				return MenuChoice.FAIL;// 종료X 외부 반복
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
-				return MenuChoice.ERROR;//오류 종료
-				
+				return MenuChoice.ERROR;// 오류 종료
+
 			default:
-				System.out.println(cID +"|잘못된값입니다 다시 입력해주세요");
-				break;//내부반복
+				System.out.println(cID + "|잘못된값입니다 다시 입력해주세요");
+				break;// 내부반복
 			}
+			System.out.println(cID + "|관리자 메뉴로 복귀");
 		}
 	}
 
-	
-	
-	
-	// 서버 관리자 메뉴 관리 메뉴
-	private static String manageMenu(String cID,Socket s) {
+	// 서버 관리자 메뉴 관리 메뉴111
+	private static String manageMenu(String cID, Socket s) {
 		System.out.println(cID + ": 메뉴 관리 메뉴로 이동합니다.");
 		SClientHandler sch = null;
 		String choice;
@@ -225,83 +225,69 @@ public class SrMain {
 		while (true) {
 			// ------------------------------------------------------------------------
 			// 수신
-			choice = sch.receive();//수신---------------------------------------------
+			choice = sch.receive();// 수신---------------------------------------------
 			//
-			System.out.println("socket: "+ s );
-			System.out.print(cID +"|");
-			System.out.println("받은값: "+choice);//--
+			System.out.println("socket: " + s);
+			System.out.print(cID + "|");
+			System.out.println("받은값: " + choice);// --
 
 			switch (choice) {
 			case AdminChoice.LIST:
-				System.out.println(cID +"|선택: 직원 목록 조회");
-				//choice = amm.loadEmployeeList(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				System.out.println(cID + "|선택: 직원 목록 조회");
+				// choice = amm.loadEmployeeList(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-				
+
 			case AdminChoice.ADD:
-				System.out.println(cID +"|선택: 직원 추가");
-				//choice = amm.add(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				System.out.println(cID + "|선택: 직원 추가");
+				// choice = amm.add(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-				
+
 			case AdminChoice.DELETE:
-				System.out.println(cID +"|선택: 직원 삭재");
+				System.out.println(cID + "|선택: 직원 삭재");
 				//
 				//
-				//choice = amm.loadEmployeeList(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				// choice = amm.loadEmployeeList(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				//
 				//
-				//choice = amm.delete(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				// choice = amm.delete(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
 
 			case AdminChoice.EDIT:
-				System.out.println(cID +"|선택: 직원 삭재");
-				//choice = amm.edit(s);
-				if (choice.equals(MenuChoice.ERROR)){
-					return MenuChoice.ERROR;//종료함
+				System.out.println(cID + "|선택: 직원 삭재");
+				// choice = amm.edit(s);
+				if (choice.equals(MenuChoice.ERROR)) {
+					return MenuChoice.ERROR;// 종료함
 				}
 				break;
-			
+
 			case AdminChoice.BACK:
-				System.out.println(cID +"|관리자 메뉴로");
-				return MenuChoice.FAIL;//종료X  외부 반복
-				
+				System.out.println(cID + "|관리자 메뉴로");
+				return MenuChoice.FAIL;// 종료X 외부 반복
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
-				return MenuChoice.ERROR;//오류 종료
-				
+				return MenuChoice.ERROR;// 오류 종료
+
 			default:
-				System.out.println(cID +"|잘못된값입니다 다시 입력해주세요");
-				break;//내부반복
+				System.out.println(cID + "|잘못된값입니다 다시 입력해주세요");
+				break;// 내부반복
 			}
 		}
 	}
 
-	
-	
-	
-
-	
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-	
-
-	
-	
-	
-	
-	
-	
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	// 서버 서버 메뉴
 	private static String serverMenu(String cID, Socket s) {
@@ -321,37 +307,36 @@ public class SrMain {
 			// 수신
 			choice = sch.receive();
 			//
-			System.out.println("socket: "+ s );
-			System.out.println(cID +": "+ choice);
+			System.out.println("socket: " + s);
+			System.out.println(cID + ": " + choice);
 			//
 			switch (choice) {
 			case MenuChoice.LOGOUT:
 				System.out.println("로그아웃");
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
-				choice = manageEMP(cID,s);
+				choice = manageEMP(cID, s);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
-				choice = manageMenu(cID,s);
+				choice = manageMenu(cID, s);
 				break;
-				
-			//case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
-				
+
+			// case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.print("재입력 요청:");
 				break;
 			}
 		}
 	}
-
 
 	// 서버 회계 메뉴
 	private static String accountMenu(String cID, Socket s) {
@@ -371,37 +356,36 @@ public class SrMain {
 			// 수신
 			choice = sch.receive();
 			//
-			System.out.println("socket: "+ s );
-			System.out.println(cID +": "+ choice);
+			System.out.println("socket: " + s);
+			System.out.println(cID + ": " + choice);
 			//
 			switch (choice) {
 			case MenuChoice.LOGOUT:
 				System.out.println("로그아웃");
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
-				choice = manageEMP(cID,s);
+				choice = manageEMP(cID, s);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
-				choice = manageMenu(cID,s);
+				choice = manageMenu(cID, s);
 				break;
-				
-			//case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
-				
+
+			// case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.print("재입력 요청:");
 				break;
 			}
 		}
 	}
-
 
 	// 서버 쉐프 메뉴
 	private static String chefMenu(String cID, Socket s) {
@@ -421,30 +405,30 @@ public class SrMain {
 			// 수신
 			choice = sch.receive();
 			//
-			System.out.println("socket: "+ s );
-			System.out.println(cID +": "+ choice);
+			System.out.println("socket: " + s);
+			System.out.println(cID + ": " + choice);
 			//
 			switch (choice) {
 			case MenuChoice.LOGOUT:
 				System.out.println("로그아웃");
 				return MenuChoice.FAIL;
-				
+
 			case AdminChoice.MANAGEEMPLOYEES:
 				System.out.println("직원 관리");
-				choice = manageEMP(cID,s);
+				choice = manageEMP(cID, s);
 				break;
-				
+
 			case AdminChoice.MANAGEMENU:
 				System.out.println("메뉴 관리");
-				choice = manageMenu(cID,s);
+				choice = manageMenu(cID, s);
 				break;
-				
-			//case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
-				
+
+			// case MenuChoice.FAIL:System.out.println("실패");return MenuChoice.FAIL;
+
 			case MenuChoice.ERROR:
 				System.out.println("오류");
 				return MenuChoice.ERROR;
-				
+
 			default:
 				System.out.print("재입력 요청:");
 				break;
