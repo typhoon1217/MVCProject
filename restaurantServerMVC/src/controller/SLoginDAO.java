@@ -12,7 +12,7 @@ public class SLoginDAO {
     public String loginAndGetDepartment(String id, String password) {
         String department = MenuChoice.FAIL;
         
-        String sql = "SELECT EMP_DEPARTMENT FROM Employee WHERE EMP_ID = ? AND EMP_PASSWORD = ?";
+        String sql = "SELECT * FROM Employee WHERE EMP_ID = ? AND EMP_PASSWORD = ?";
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
